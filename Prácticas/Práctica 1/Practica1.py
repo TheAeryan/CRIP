@@ -1,13 +1,15 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
-# Calcular a^b mod m
+"""
+Código asociado a la primera Práctica de Criptografía y Computación.
 
-import sys
-import time
+@author: Carlos Núñez Molina
+"""
+
 from random import randint
 
-# Naive
+# Calcula a^b mod m de forma naive
 # Es O(b)
 def potencia_modular_naive(a, b, m):
 	res = 1
@@ -19,7 +21,7 @@ def potencia_modular_naive(a, b, m):
 	
 	return res;
 
-# Ahorra en el número de potencias   
+# Hace lo mismo que la función anterior pero de forma eficiente.
 # Ej.: si es 7^100 mod m, 7^100 es 7^64 * 7^32 * 7^4. Lo hago así
 # para ahorrar multiplicaciones (esa descomposición viene dada
 # por las cifras donde el número en binario vale 1)
@@ -39,6 +41,16 @@ def potencia_modular(a, b, m):
         
     return p
 
+# Test de Fermat eligiendo solo "a" como testigo
+def test_fermat(p, a):        
+    res = potencia_modular(a, p-1, p)
+    
+    if res == 1:
+        return True
+    else:
+        return False
+    
+    
 # Test de Fermat
 # Es p primo?
 # 1. Elegimos a tq. 2 <= a <= p-2
@@ -52,10 +64,10 @@ def test_fermat_repetido(p):
         
         print(potencia_modular(a, p-1, p))
     
-# Obtiene las raíces de la ecuación congruencial x^2 - 1 = 0 mod p
+    
+# Función que obtiene las soluciones de la ecuación x^2 mod p = 1
 # Si para p esta ecuación tiene más de dos soluciones p no es primo.
 # Si solo tiene dos soluciones, p puede ser primo
-        
 # Como mínimo, siempre son soluciones de la ecuación (raíces): 1 y p-1
 # Por esto, ver si la ecuación tiene más de dos raíces se reduce a ver
 # si hay algún otro número distinto de 1 y n-1 que sea solución
@@ -68,6 +80,8 @@ def raicesuno(p):
             
     return l
 
+# Calcula las soluciones de la ecuación x^2 mod p = 1 para los números
+# entre 2 y 99
 def raicesunorep():
     
     for j in range(2, 100):
@@ -91,7 +105,7 @@ def raicesunorep():
 # total de testigos -> Este test falla (da resultado de probable
 # primo cuando no lo es), como mucho un 25% de las veces
 
-# Paso 1
+# Implementa el paso 1 del test de Miller-Rabin
 def descomponer_2us(n_m1):
     a = n_m1
     u = 0
@@ -102,7 +116,8 @@ def descomponer_2us(n_m1):
         
     return u, a
 
-# Devuelve True si n pasa la prueba (es probable primo)
+# Ejecuta el test de Miller Rabin con el testigo a
+# Devuelve True si n es probable primo y False si es compuesto
 def test_MillerRabin_unavez(n, a):
     # Paso 1
     u, s = descomponer_2us(n-1)
@@ -129,11 +144,56 @@ def test_MillerRabin_unavez(n, a):
 
         return False
 
+# Calcula todos los testigos falsos del número compuesto n
+# El test falla para un testigo a si devuelve que n es posible primo pero el
+# el número es compuesto
+def falsos_testigos_test_MillerRabin(n):
+    
+    # Voy probando todos los testigos desde (2 hasta n-2)
+    for i in range(2, n-1):
+        res = test_MillerRabin_unavez(n, i)
+        
+        if res: # Ha salido que es probable primo -> i es un testigo falso para n
+            print(i)
 
-# <Funciones de la práctica>
-# Dado n, m
-# Elige m testigos al azar (entre 2 y n-2)
-# Comprueba si n es probable primo o no
+# Igual que la función anterior, pero en vez de devolver todos los falsos
+# testigos solo prueba con num_testigos
+def falsos_testigos_test_MillerRabin_algunos(n, num_testigos):
+    
+    # Voy probando todos los testigos
+    for i in range(num_testigos):
+        a = randint(2, n-2)
+        
+        res = test_MillerRabin_unavez(n, a)
+        
+        if res: # Ha salido que es probable primo -> a es un testigo falso para n
+            print(a, end=", ")
+
+# Igual que la función anterior, pero para cada testigo ve si es falso
+# con el test de Fermat y de MillerRabin
+def falsos_testigos_test_MillerRabin_y_fermat_algunos(n, num_testigos):
+    falsos_fermat = []
+    falsos_milrab = []
+    
+    # Voy probando todos los testigos
+    for i in range(num_testigos):
+        a = randint(2, n-2)
+        
+        res_fermat = test_fermat(n, a)   
+        res_milrab = test_MillerRabin_unavez(n, a)
+        
+        # Compruebo si son falsos testigos
+        if res_fermat:
+            falsos_fermat.append(a)
+            
+        if res_milrab:
+            falsos_milrab.append(a)
+            
+    # Imprimo los resultados
+    print("Fermat ({}): {}".format(len(falsos_fermat), falsos_fermat))
+    print("Miller-Rabin ({}): {}".format(len(falsos_milrab), falsos_milrab))
+
+# Ejecuta el test de Miller Rabin con m testigos elegidos aleatoriamente
 def test_MillerRabin(n, m):
     
     for i in range(m):
@@ -147,7 +207,6 @@ def test_MillerRabin(n, m):
     return True
 
 # Dado n, elige el primer primo p>=n
-# (voy sumandole dos hasta encontrar un probable primo) 
 def primer_primo_mayor(n):
     num_rep = 20 # Probabilidad menor a 1 entre un billón
     
@@ -158,13 +217,13 @@ def primer_primo_mayor(n):
     
     n = n-2
     while not es_pos_primo:
-        n += 2
+        n += 2 # voy sumandole dos hasta encontrar un probable primo)
         es_pos_primo = test_MillerRabin(n, num_rep)
       
     return n
 
 # Dado n, elige el primer primo fuerte p>=n
-# Primo fuerte: si p como (p-1)/2 es primo
+# Primo fuerte: si tanto p como (p-1)/2 es primo
 def primer_primo_fuerte_mayor(n):
     num_rep = 20 # Probabilidad menor a 1 entre un billón
     
@@ -185,12 +244,13 @@ def primer_primo_fuerte_mayor(n):
     return n
     
 # Dado n, devuelve un primo de n bits
-# p debe estar entre 2^n-1 y 2^n -> Elegir aleatorio en ese rango y calcular siguiente primo
+# p debe estar entre 2^n-1 y 2^n -> Se elige un número aleatorio en ese rango
+# y se calcula el siguiente primo
 def primo_de_longitud_n(n):
     # Elijo un random int entre 2^n-1 y 2^n
     ini = randint(2**(n-1), 2**n)
     
-    # Calculo el siguiente primo
+    # Calculo el siguiente primo al número elegido
     p = primer_primo_mayor(ini)
     
     return p
