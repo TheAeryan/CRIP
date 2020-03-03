@@ -130,7 +130,31 @@ def test_MillerRabin_unavez(n, a):
         return True
     else:
         for i in range(1, u): # El último caso se corresponde siempre con el Test de Fermat
-            a = potencia_modular(a,2,n)
+            a = a*a % n # Igual que potencia_modular(a,2,n)
+            
+            if a == 1:
+                return False
+            
+            # Si a vale n-1, eso en módulo n es igual a -1
+            # Así, al elevarlo al cuadrado siempre me dará 1
+            # De esta forma, solo me salen como solución de la ecuación
+            # 1 y n-1, con lo que n es probable primo
+            if a == n-1:
+                return True
+
+        return False
+
+# Igual que el anterior, pero recibe ya la descomposición de n-1 como 2^u*s
+def test_MillerRabin_unavez_ya_descompuesto(n, u, s, a):
+    # Paso 2
+    a = potencia_modular(a, s, n)
+    
+    # Paso 3
+    if a == 1 or a == n-1:
+        return True
+    else:
+        for i in range(1, u): # El último caso se corresponde siempre con el Test de Fermat
+            a = a*a % n # Igual que potencia_modular(a,2,n)
             
             if a == 1:
                 return False
@@ -148,10 +172,12 @@ def test_MillerRabin_unavez(n, a):
 # El test falla para un testigo a si devuelve que n es posible primo pero el
 # el número es compuesto
 def falsos_testigos_test_MillerRabin(n):
+    # Guardo la descomposición de n-1 como 2^u*s
+    u, s = descomponer_2us(n-1)
     
     # Voy probando todos los testigos desde (2 hasta n-2)
     for i in range(2, n-1):
-        res = test_MillerRabin_unavez(n, i)
+        res = test_MillerRabin_unavez_ya_descompuesto(n, u, s, i)
         
         if res: # Ha salido que es probable primo -> i es un testigo falso para n
             print(i)
@@ -159,12 +185,14 @@ def falsos_testigos_test_MillerRabin(n):
 # Igual que la función anterior, pero en vez de devolver todos los falsos
 # testigos solo prueba con num_testigos
 def falsos_testigos_test_MillerRabin_algunos(n, num_testigos):
+    # Guardo la descomposición de n-1 como 2^u*s
+    u, s = descomponer_2us(n-1)
     
     # Voy probando todos los testigos
     for i in range(num_testigos):
         a = randint(2, n-2)
         
-        res = test_MillerRabin_unavez(n, a)
+        res = test_MillerRabin_unavez_ya_descompuesto(n, u, s, a)
         
         if res: # Ha salido que es probable primo -> a es un testigo falso para n
             print(a, end=", ")
@@ -175,12 +203,15 @@ def falsos_testigos_test_MillerRabin_y_fermat_algunos(n, num_testigos):
     falsos_fermat = []
     falsos_milrab = []
     
+    # Guardo la descomposición de n-1 como 2^u*s
+    u, s = descomponer_2us(n-1)
+    
     # Voy probando todos los testigos
     for i in range(num_testigos):
         a = randint(2, n-2)
         
         res_fermat = test_fermat(n, a)   
-        res_milrab = test_MillerRabin_unavez(n, a)
+        res_milrab = test_MillerRabin_unavez_ya_descompuesto(n, u, s, a)
         
         # Compruebo si son falsos testigos
         if res_fermat:
@@ -195,11 +226,13 @@ def falsos_testigos_test_MillerRabin_y_fermat_algunos(n, num_testigos):
 
 # Ejecuta el test de Miller Rabin con m testigos elegidos aleatoriamente
 def test_MillerRabin(n, m):
+    # Guardo la descomposición de n-1 como 2^u*s
+    u, s = descomponer_2us(n-1)
     
     for i in range(m):
         a = randint(2, n-2) # Testigo
         
-        res = test_MillerRabin_unavez(n, a)
+        res = test_MillerRabin_unavez_ya_descompuesto(n, u, s, a)
         
         if not res:
             return False # Ya sé que no es primo
@@ -226,15 +259,18 @@ def primer_primo_mayor(n):
 # Primo fuerte: si tanto p como (p-1)/2 es primo
 def primer_primo_fuerte_mayor(n):
     num_rep = 20 # Probabilidad menor a 1 entre un billón
+   
+    n += 1 - (n % 2) # Hago que n sea impar
     
-    if n % 2 == 0:
-        n += 1
+    # n tiene que ser impar y congruente con 3 módulo 4
+    n += 3 - (n % 4)
     
     es_pos_primo_fuerte = False
     
-    n = n-2
+    # Voy dando saltos de 4 en cuatro (el doble que para ver si el número es primo)
+    n = n-4
     while not es_pos_primo_fuerte:
-        n += 2
+        n += 4
         es_pos_primo = test_MillerRabin(n, num_rep)
         
         # Si es posible primo, veo si (p-1)/2 también lo es
