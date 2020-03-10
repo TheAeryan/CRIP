@@ -1,0 +1,6 @@
+Escítalo (transposición)
+César (Sustitución monoalfabética (translación))
+Cifrado por permutación (cambiar una letra por otra) (sustitución monoalfabética)
+Vigenere (sustitución polialfabética)
+
+Un cifrado ha sido usado para dos mensajes diferentes.
