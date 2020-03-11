@@ -1,6 +1,4 @@
-# -*- coding: latin-1 -*-
-
-abecedario = ['A','B','C','D','E','F','G','H','I','J','K','L','M','N','Ñ','O','P','Q','R','S','T','U','V','W','X','Y','Z']
+abecedario = ['A','B','C','D','E','F','G','H','I','J','K','L','M','N','Ã‘','O','P','Q','R','S','T','U','V','W','X','Y','Z']
 
 
 
@@ -29,7 +27,7 @@ def listatocadena(l):
         elif x <= 13:
             s = s + chr(x+65)
         elif x == 14:
-            s = s + 'Ñ'
+            s = s + 'Ã‘'
         else:
             s = s + chr(x+64)
     return s
@@ -87,7 +85,7 @@ def cifra_vigenere(texto,clave):
 
 """Dado un texto y una permutaciÃ³n de las letras (diccionario) lo cifra aplicando la sustituciÃ³n dada
 La sustituciÃ³n hay que darla como un diccionario. Por ejemplo:
-sustitucion = {'A':'B', 'B':'C', 'C':'D', 'D':'E', 'E':'F', 'F':'G', 'G':'H', 'H':'I', 'I':'J', 'J':'K', 'K':'L', 'L':'M', 'M':'N', 'N':'Ñ', 'Ñ':'O', 'O':'P', 'P':'Q', 'Q':'R', 'R':'S', 'S':'T', 'T':'U', 'U':'V', 'V':'W', 'W':'X', 'X':'Y', 'Y':'Z', 'Z':'A'}
+sustitucion = {'A':'B', 'B':'C', 'C':'D', 'D':'E', 'E':'F', 'F':'G', 'G':'H', 'H':'I', 'I':'J', 'J':'K', 'K':'L', 'L':'M', 'M':'N', 'N':'Ã‘', 'Ã‘':'O', 'O':'P', 'P':'Q', 'Q':'R', 'R':'S', 'S':'T', 'T':'U', 'U':'V', 'V':'W', 'W':'X', 'X':'Y', 'Y':'Z', 'Z':'A'}
 que sustituye cada carÃ¡cter por el que le sigue en el alfabeto
 """
 def cifra_sustitucion(texto,permutacion):
@@ -227,3 +225,15 @@ def leer_textos_cifrados():
             lista_contenidos.append(f.read())
             
     return lista_contenidos
+
+# Va iterando desde n=2 en adelante y calculando los índices de coincidencia
+# de las subcadenas formadas al pegar saltos de n en n letras
+def indices_ocurrencias_saltos(cadena, max_n):
+    
+    for n in range(1, max_n+1):
+        lista_cadenas = divide_cadena(cadena, n)
+        
+        indices = [indice_coincidencia(cad) for cad in lista_cadenas]
+        
+        print("{} - {}".format(n, indices))
+        

@@ -17,6 +17,12 @@
 	\section{Cifrado de Vigenére}
 	Primero desciframos el texto cifrado mediante el \textbf{Cifrado de Vigenére}. Para ello usamos el método del \textbf{Índice de Coincidencia}.
 	
-	Empezamos calculando el índice de coincidencia de todos los textos cifrados, del 1 al 5. 
+	Empezamos calculando el índice de coincidencia de todos los textos cifrados, del 1 al 5. Los índices obtenidos, en orden, son: 0.091, 0.064, 0.063, 0.032, 0.066. Sabemos que el índice de coincidencia medio de los textos en español es de 0.07. Como de todos los cifrados usados solo el de Vigenére cambia el índice de coincidencia del texto original, reduciéndolo al uniformizar las frecuencias de aparición de las distintas letras, sabemos que de todos los textos solo el número 4 ha sido cifrado con Vigenére, al tener un índice de coincidencia de 0.032.
+	
+	Acto seguido, calculamos la longitud de la clave usada. Para ello, vamos iterando desde $n=2$ en adelante, dividiendo el texto en sucesivas partes, pegando "saltos" de $n$ letras y calculando el índice de coincidencia de todas estas partes, hasta que todos valgan alrededor de 0.07. Cuando $n=12$, todas las subcadenas obtenidas tienen un índice de coincidencia alrededor de 0.07, por lo que sabemos que la clave debe ser de longitud 12.
+	
+	Así, procedo a dividir el texto en las subcadenas correspondientes a dar saltos para $n=12$ y les aplico un análisis de frecuencias como si cada subcadena hubiera sido cifrada con el Cifrado de Cesar. Las claves obtenidas (correspondientes al número de desplazamientos) son: 18, 4, 13, 0, 2, 8, 12, 8, 4, 13, 20, 15. Al concatenarlas y asociarles su letra correspondiente, obtenemos la clave \textbf{\emph{RENACIMIENTO}}.
+	
+	Esta es la clave usada para cifrar el texto 4 con el Cifrado de Vigenére, y con la que podemos descifrar el texto. Para ello, obtenemos la \emph{clave inversa}, es decir, la clave con la que, al cifrar el texto cifrado de nuevo con Vigénere, obtenemos el texto original. Esta clave se obtiene aplicando, para cada letra, los desplazamientos de Cesar en sentido contrario y es: {\emph{JWÑAYSOSWÑHM}.
 	
 \end{document}
