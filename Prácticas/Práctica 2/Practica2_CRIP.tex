@@ -24,5 +24,13 @@
 	Así, procedo a dividir el texto en las subcadenas correspondientes a dar saltos para $n=12$ y les aplico un análisis de frecuencias como si cada subcadena hubiera sido cifrada con el Cifrado de Cesar. Las claves obtenidas (correspondientes al número de desplazamientos) son: 18, 4, 13, 0, 2, 8, 12, 8, 4, 13, 20, 15. Al concatenarlas y asociarles su letra correspondiente, obtenemos la clave \textbf{\emph{RENACIMIENTO}}.
 	
 	Esta es la clave usada para cifrar el texto 4 con el Cifrado de Vigenére, y con la que podemos descifrar el texto. Para ello, obtenemos la \emph{clave inversa}, es decir, la clave con la que, al cifrar el texto cifrado de nuevo con Vigénere, obtenemos el texto original. Esta clave se obtiene aplicando, para cada letra, los desplazamientos de Cesar en sentido contrario y es: {\emph{JWÑAYSOSWÑHM}.
+
+\newpage
+
+
+\section{Cifrado Escítalo}
+	Por segundo, desciframos los textos cifrado mediante el \textbf{Cifrado de Escítalo}. Utilizamos la función \textbf{Análisis de Frecuencia}.
+	Hacemos el análisis de frecuencia de todos los textos. Podemos ver que en el \emph{texto 3} el análisis de frecuencia es parecida a la de un texto bastante largo escrito en español. Entonces, seguramente el texto será cifrado con Escítalo, porqué este tipo de encriptación no cambia el análisis de frecuencia de un texto.
+	Después de hacer esto, ententamos iterando desde 2 hasta usando la fuerza bruta hasta que hemos descifrado el mensaje.
 	
 \end{document}
