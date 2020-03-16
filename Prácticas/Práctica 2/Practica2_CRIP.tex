@@ -28,12 +28,12 @@
 
 
 \section{Cifrado Escítalo}
-	Por segundo, desciframos los textos cifrado mediante el \textbf{Cifrado de Escítalo}. Utilizamos la función \textbf{Análisis de Frecuencia}.
+	Por segundo, intentaremos a descifrar los textos mediante el \textbf{Cifrado de Escítalo}. Utilizamos la función \textbf{Análisis de Frecuencia}.
 	Hacemos el análisis de frecuencia de todos los textos. Podemos ver que en el \emph{texto 3} el análisis de frecuencia es parecida a la de un texto bastante largo escrito en español. Entonces, seguramente el texto será cifrado con Escítalo, porqué este tipo de encriptación no cambia el análisis de frecuencia de un texto.
-	Después de hacer esto, ententamos iterando desde 2 hasta usando la fuerza bruta hasta que hemos descifrado el mensaje.
+	Después de hacer esto, ententamos iterando desde 2 hasta usando la fuerza bruta hasta que hemos descifrado el mensaje, y hacemos esto con la función \textbf{cifra_transposicion(texto3,n)}. El numero que sale es $n=23$.
 	
 \section{Cifrado de Cesar}
-	Luego, se descifraron los textos que se encontran cifrados con \textbf{Cifrado de Cesar} para lo cual se evaluaron las \textbf{frecuencias} de los textos. Así, evidenciamos que en el texto 1 la letra más frecuente es la V con 25.636 por cien, seguida de la letra Z con 7.872 y la letra Ñ con 6.848. 
-	Teniendo en cuenta que las letras más frecuentes en el español son la A y la E, identificamos que éstas se encuentran en la misma distancia entre sí que las letras V y Z dado que en ambos casos hay 4 saltos. Por tanto se evalua que el texto fue cifrado con Cesar donde el número de saltos corresponde a 21, lo cual se logró comprobar al realizar la respectiva sustitución por cada letra llegando a descifrar el texto. 
+	Luego, se descifraron los textos que se encontran cifrados con \textbf{Cifrado de Cesar} para lo cual se evaluaron las \textbf{frecuencias} de los textos. Así, evidenciamos que en el \emph{texto 1} la letra más frecuente es la V con 25.636 por cien, seguida de la letra Z con 7.872 y la letra Ñ con 6.848; en el \emph{texto 2} las letras mas frecuentes son la L con 12.59 por cien y la O con 11.836 por cien.
+	Teniendo en cuenta que las letras más frecuentes en el español son la A y la E, identificamos que éstas se encuentran en la misma distancia entre sí que las letras \emph{V y Z} y las letras \emph{L y O} dado que en ambos casos hay 4 saltos. Por tanto se evalua que los textos fue cifrado con Cesar donde el número de saltos corresponde a 21 en el primer texto1 a 7 en el texto2, lo cual se logró comprobar al realizar la respectiva sustitución por cada letra llegando a descifrar los textos. 
 	
 \end{document}
