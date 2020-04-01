@@ -1,4 +1,18 @@
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
 
+"""
+Código asociado a la tercera práctica de Criptografía y Computación.
+
+@author: Carlos Núñez Molina
+@author: Alessandro Zito
+@author: Gabriela Antolinez
+"""
+
+from Practica1 import *
+import math
+
+# ------------ Funciones auxiliares ----------------
 
 #Calcula el máximo común divisor de dos números.
 def mcd(a,b):
@@ -47,4 +61,24 @@ def escuadrado(n):
     y = raiz(n)
     return(y**2 == n)
 
-
+# ------------ Funciones para la factorización -------------
+    
+"""
+Dado n un número compuesto, devuelve sus factores.
+POR AHORA ESTOY SUPONIENDO QUE N ES PRODUCTO DE DOS PRIMOS!!!
+"""
+def factorizacion_fermat(n):
+    x = math.ceil(math.sqrt(n)) # x empieza siendo ceil(sqrt(n))
+    
+    # Voy aumentando el valor de x hasta que encuentre una factorización
+    while (True):
+        y = x**2 - n
+        
+        if escuadrado(y): # Si y es un cuadrado, ya he encontrado los divisores de n
+            r = raiz(y)
+            
+            # Devuelvo los dos divisores: (x-r) y (x+r)
+            return (x-r, x+r)
+        
+        x += 1 # Incremento x en una unidad y vuelvo a probar
+        
