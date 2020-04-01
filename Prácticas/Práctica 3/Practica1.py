@@ -226,6 +226,10 @@ def falsos_testigos_test_MillerRabin_y_fermat_algunos(n, num_testigos):
 
 # Ejecuta el test de Miller Rabin con m testigos elegidos aleatoriamente
 def test_MillerRabin(n, m):
+    # Caso especial (si no lo hago así, me da ValueError al elegir el testigo aleatorio)
+    if n <= 3:
+        return True
+    
     # Guardo la descomposición de n-1 como 2^u*s
     u, s = descomponer_2us(n-1)
     
