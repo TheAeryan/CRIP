@@ -11,7 +11,7 @@ Código asociado a la tercera práctica de Criptografía y Computación.
 
 from Practica1 import *
 import math
-import itertools
+from random import randint
 
 # ------------ Funciones auxiliares ----------------
 
@@ -63,6 +63,85 @@ def escuadrado(n):
     return(y**2 == n)
 
 # ------------ Funciones para la factorización -------------
+      
+"""
+Genera una lista de n números compuestos de "num_cifras". Todos los números menos
+uno se generan eligiendo un número impar al azar de num_cifras y comprobando que no es
+primo. El otro número, se elige como múltiplo de dos números primos de num_cifras // 2. 
+"""   
+def generar_compuestos_num_cifras(num_cifras, n=10): 
+    lista_nums = []
+    
+    # Creo el compuesto como producto de primos
+    num_cif_primos = num_cifras // 2
+    
+    # Elijo a dos primos aleatorios de num_cif_primos
+    primos = []
+    
+    while len(primos) < 2:
+        x = randint(10**(num_cif_primos-1), 10**num_cif_primos)
+        
+        # Compruebo si x es primo con el Test de Miller-Rabin con 20 testigos
+        if test_MillerRabin(x, 20):
+            primos.append(x)
+            
+    lista_nums.append(primos[0]*primos[1])
+    
+    # Creo el resto de números compuestos
+    while len(lista_nums) < n:
+        x = randint(10**(num_cifras-1), 10**num_cifras)
+        
+        # Solo lo añado si es impar y compuesto
+        if x % 2 == 1 and not test_MillerRabin(x, 20):
+            lista_nums.append(x)
+            
+    return lista_nums
+    
+"""
+Dado n un número compuesto, devuelve todos sus factores por fuerza bruta.
+""" 
+def factorizacion_tentativa(n):
+    factores = []
+    
+    # Para poder "dar saltos" de 2 en 2 a través de todos los números impares,
+    # primero saco los factores que son potencia de dos
+    if n % 2 == 0:
+        potencia = 1
+        n = n // 2
+            
+        while n % 2 == 0:
+            potencia += 1
+            n = n // 2
+        
+        factores.append([2]*potencia)
+        
+    seguir = (n != 1) # Si n es potencia de 2, ya he terminado de factorizarlo
+    
+    x = 3
+    
+    while seguir:
+        if n % x == 0: # X es divisor de n. Compruebo cuantas veces divide a n.
+            potencia = 1
+            n = n // x
+            
+            while n % x == 0:
+                potencia += 1
+                n = n // x
+                
+            # Añado el factor el número de veces necesario (según su potencia)
+            factores.append([x]*potencia) # Se añade [x,x,x,...,x] donde el número de "x" es "potencia"
+            
+            # Si el número ya vale uno, he terminado de factorizarlo
+            if n == 1:
+                seguir = False
+            # Si el número ya es primo, he terminado de factorizarlo
+            elif test_MillerRabin(n, 20): # Aplico el Test de Miller-Rabin con 20 testigos
+                factores.append([n]) # Añado al número primo como factor
+                seguir = False
+            
+        x += 2 # Pruebo con el siguiente número impar
+    
+    return factores
     
 """
 Dado n un número compuesto, devuelve todos sus factores usando el método de Fermat.
