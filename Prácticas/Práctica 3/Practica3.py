@@ -12,6 +12,7 @@ Código asociado a la tercera práctica de Criptografía y Computación.
 from Practica1 import *
 import math
 from random import randint
+import time
 
 # ------------ Funciones auxiliares ----------------
 
@@ -184,16 +185,18 @@ def factorizacion_fermat(n):
         x += 1 # Incremento x en una unidad y vuelvo a probar
 
 
-def factorizacion_pollard(n = 1247629):
+def factorizacion_pollard(n):
 
 	x = 1
 	y = 2
-
+	
+	start = time.clock()
 	while mcd(y-x,n) == 1:
 		x = ((x ** 2) + 1) % n
 		for i in range (2):
 			y = ((y ** 2) + 1) 
 		y = y % n
+	print(time.clock() - start)
 	return mcd(y-x,n)
 
 
