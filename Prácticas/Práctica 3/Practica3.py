@@ -180,6 +180,23 @@ def factorizacion_fermat(n):
                 factores[1] = factorizacion_fermat(factores[1])
                 
             return factores
-        
+
         x += 1 # Incremento x en una unidad y vuelvo a probar
-        
+
+
+def factorizacion_pollard(n = 1247629):
+
+	x = 1
+	y = 2
+
+	while mcd(y-x,n) == 1:
+		x = ((x ** 2) + 1) % n
+		for i in range (2):
+			y = ((y ** 2) + 1) 
+		y = y % n
+	return mcd(y-x,n)
+
+
+
+
+
