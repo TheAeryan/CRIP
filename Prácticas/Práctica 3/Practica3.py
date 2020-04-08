@@ -185,7 +185,7 @@ def factorizacion_fermat(n):
         x += 1 # Incremento x en una unidad y vuelvo a probar
 
 
-def factorizacion_pollard(n = 1247629):
+def factorizacion_pollard(n):
 
 	x = 1
 	y = 2
