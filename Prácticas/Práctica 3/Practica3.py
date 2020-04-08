@@ -185,20 +185,40 @@ def factorizacion_fermat(n):
         x += 1 # Incremento x en una unidad y vuelvo a probar
 
 
-def factorizacion_pollard(n):
+def factorizacion_pollard(n = 1247629):
 
 	x = 1
 	y = 2
 	
 	start = time.clock()
-	while mcd(y-x,n) == 1:
-		x = ((x ** 2) + 1) % n
-		for i in range (2):
-			y = ((y ** 2) + 1) 
-		y = y % n
-	print(time.clock() - start)
-	return mcd(y-x,n)
+	while True:
+		a = mcd(y-x, n)
 
+		#Si el MCD no es ni 1 ni n, entonces el numero que sale es divisor de n
+		if a != 1 and a != n:
+
+			#b será el otro divisor
+			b = n // a
+			divisores = [b, a]
+			
+			#Si son primos, los devuelvos. Si no, hago recursivamente la factorización.
+			if not test_MillerRabin(divisores[0], 20):
+				divisores[0] = factorizacion_pollard(divisores[0])
+
+			if not test_MillerRabin(divisores[1], 20):
+				divisores[1] = factorizacion_pollard(divisores[1])
+			
+			print(time.clock() - start)
+			return divisores
+		
+		#Si el mcd es 1, intento con otros numeros (la función f (x) que aumenta x y y es: f(x) = (x ** 2 + 1) mód n)
+		x = (x ** 2 + 1) % n
+		
+		for i in range(2):
+			y = y ** 2 + 1
+		y = y % n
+
+			
 
 
 
