@@ -221,5 +221,21 @@ def factorizacion_pollard(n):
 			
 
 
+# ------------ Funciones para el logarítmo discreto -------------
 
+def ld_pasoenanogigante(a,b,p):
+	s = raiz(p) + 1 
+	sol = []
+	sol.append(b % p)
+	for i in range(s-1):
+		sol.append(sol[i] * 11 % p)
+	t = 1
+	for t in range(s):
+		n = (a ** (t * s)) % p
+		for i in range(len(sol)):
+			if sol[i] == n:
+				x = t * s - i
+				return x
+	print("No existe el numero")
+	return
 
