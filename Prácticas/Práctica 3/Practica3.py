@@ -223,6 +223,14 @@ def factorizacion_pollard(n):
 
 # ------------ Funciones para el logarítmo discreto -------------
 
+def ld_fuerzabruta(a,b,p):
+	for i in range(p-1):
+	    x=potencia_modular(a,i,p)
+	    if(x==b):
+	        return i
+	    if(x==1 and i!=0):
+	        return "No hay solución."
+
 def ld_pasoenanogigante(a,b,p):
 	s = raiz(p) + 1 
 	sol = []
