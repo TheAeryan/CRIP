@@ -12,7 +12,8 @@ Código asociado a la tercera práctica de Criptografía y Computación.
 from Practica1 import *
 import math
 from random import randint
-import time
+import timeit
+import matplotlib.pyplot as trx
 
 # ------------ Funciones auxiliares ----------------
 
@@ -213,7 +214,7 @@ def factorizacion_pollard(n):
 
 			return divisores
 
-		else n % 7 == 0:
+		elif n % 7 == 0:
 			a = n // 7
 			divisores = [7, a]
 
@@ -250,6 +251,23 @@ def factorizacion_pollard(n):
 			y = (y ** 2 + 1) % n
 
 
+# ------------ Analisis de los tiempos --------------------------
+
+
+numeros = [35, 125, 1356, 14548, 1247629]
+tiempos_fuerza_bruta = []
+tiempos_fermat = []
+tiempos_pollard = []
+
+
+for n in numeros:
+	tiempos_fuerza_bruta.append(timeit.timeit('factorizacion_tentativa(n)', number = 1))
+	tiempos_fermat.append(timeit.timeit('factorizacion_fermat(n)', number = 1))
+	tiempos_pollard.append(timeit.timeit('factorizacion_pollard(n)', number = 1))
+
+
+
+
 # ------------ Funciones para el logarítmo discreto -------------
 
 def ld_fuerzabruta(a,b,p):
@@ -260,9 +278,10 @@ def ld_fuerzabruta(a,b,p):
 	    if(x==1 and i!=0):
 	        return "No hay solución."
 
+
+
 def ld_pasoenanogigante(a,b,p):
-	def ld_pasoenanogigante(a,b,p):
-	
+
 	s = raiz(p) + 1 
 	sol = []
 	
@@ -291,5 +310,6 @@ def ld_pasoenanogigante(a,b,p):
 	print(time.clock() - start)
 	print("No existe el numero")
 	return
+
 
 
