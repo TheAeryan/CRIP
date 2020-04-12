@@ -192,6 +192,38 @@ def factorizacion_pollard(n):
 	
 	# start = time.clock() LA MEDICIÓN DE TIEMPOS SE HACE FUERA DE LA FUNCIÓN
 	while True:
+	
+		if n % 3 == 0: 
+			a = n // 3
+			divisores = [3, a]
+			
+			#Si a es primo, los devuelvo. Si no, hago recursivamente la factorización.
+			if not test_MillerRabin(a, 20):
+				a = factorizacion_pollard(a)
+
+			return divisores
+		
+		elif n % 5 == 0:
+			a = n // 5
+			divisores = [5, a]
+
+			#Si a es primo, los devuelvo. Si no, hago recursivamente la factorización.
+			if not test_MillerRabin(a, 20):
+				a = factorizacion_pollard(a)
+
+			return divisores
+
+		else n % 7 == 0:
+			a = n // 7
+			divisores = [7, a]
+
+			#Si a es primo, los devuelvo. Si no, hago recursivamente la factorización.
+			if not test_MillerRabin(a, 20):
+				a = factorizacion_pollard(a)
+
+			return divisores
+
+
 		a = mcd(y-x, n)
         
 		#Si el MCD no es ni 1 ni n, entonces el numero que sale es divisor de n
