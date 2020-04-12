@@ -229,18 +229,35 @@ def ld_fuerzabruta(a,b,p):
 	        return "No hay solución."
 
 def ld_pasoenanogigante(a,b,p):
+	def ld_pasoenanogigante(a,b,p):
+	
 	s = raiz(p) + 1 
 	sol = []
+	
+	start = time.clock()
+	#Pongo b en la lista
 	sol.append(b % p)
+
+	#Pongo todos los numeros desde b * a hasta b * (a ** (s - 1)) en la lista 
 	for i in range(s-1):
-		sol.append(sol[i] * 11 % p)
+		sol.append(sol[i] * a % p)
+
+	#Ahora desde aquí vamos calculando n desde a ** s hasta a ** (s * s), y tenemos t como contador para ver hasta que no encontramos n = sol[i]
+	n = (a ** s) % p
 	t = 1
-	for t in range(s):
-		n = (a ** (t * s)) % p
+	while t != s:
 		for i in range(len(sol)):
 			if sol[i] == n:
+
+				#Si lo encontramos, returnamos el resultado del logaritmo com t * s - i
 				x = t * s - i
+				print(time.clock() - start)
 				return x
+		n = (n * (a ** s)) % p
+		t += 1
+
+	print(time.clock() - start)
 	print("No existe el numero")
 	return
+
 
