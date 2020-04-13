@@ -12,7 +12,7 @@ Código asociado a la tercera práctica de Criptografía y Computación.
 from Practica1 import *
 import math
 from random import randint
-import timeit
+import time
 import matplotlib.pyplot as trx
 
 # ------------ Funciones auxiliares ----------------
@@ -190,18 +190,15 @@ def factorizacion_pollard(n):
 
 	x = 1
 	y = 2
-	
-	# start = time.clock() LA MEDICIÓN DE TIEMPOS SE HACE FUERA DE LA FUNCIÓN
-	while True:
-	
-		if n % 3 == 0: 
-			a = n // 3
-			divisores = [3, a]
-			
-			#Si a es primo, los devuelvo. Si no, hago recursivamente la factorización.
-			if not test_MillerRabin(a, 20):
-				a = factorizacion_pollard(a)
 
+	
+	if n % 3 == 0: 
+		a = n // 3
+		divisores = [3, a]
+			
+		#Si a es primo, los devuelvo. Si no, hago recursivamente la factorización.
+		if not test_MillerRabin(a, 20):
+			a = factorizacion_pollard(a)
 			return divisores
 		
 		elif n % 5 == 0:
@@ -225,6 +222,11 @@ def factorizacion_pollard(n):
 			return divisores
 
 
+	
+	p = sqrt(n)
+	# start = time.clock() LA MEDICIÓN DE TIEMPOS SE HACE FUERA DE LA FUNCIÓN
+	while p:
+	
 		a = mcd(y-x, n)
         
 		#Si el MCD no es ni 1 ni n, entonces el numero que sale es divisor de n
@@ -249,23 +251,8 @@ def factorizacion_pollard(n):
 		
 		for i in range(2):
 			y = (y ** 2 + 1) % n
-
-
-# ------------ Analisis de los tiempos --------------------------
-
-
-numeros = [35, 125, 1356, 14548, 1247629]
-tiempos_fuerza_bruta = []
-tiempos_fermat = []
-tiempos_pollard = []
-
-
-for n in numeros:
-	tiempos_fuerza_bruta.append(timeit.timeit('factorizacion_tentativa(n)', number = 1))
-	tiempos_fermat.append(timeit.timeit('factorizacion_fermat(n)', number = 1))
-	tiempos_pollard.append(timeit.timeit('factorizacion_pollard(n)', number = 1))
-
-
+		
+		p =- 1
 
 
 # ------------ Funciones para el logarítmo discreto -------------
@@ -311,5 +298,27 @@ def ld_pasoenanogigante(a,b,p):
 	print("No existe el numero")
 	return
 
+
+def analisis_tiempos_fb(lista1 = []):
+	tm = time.time()
+	for i in range(len(lista1)):
+		factorizacion_tentativa(lista1[i])
+	return time.time() - tm
+
+
+
+def analisis_tiempos_fermat(lista1 = []):
+	tm = time.time()
+	for i in range(len(lista1)):
+		factorizacion_fermat(lista1[i])
+	return time.time() - tm
+
+
+
+def analisis_tiempos3_pollard(lista1 = []):
+	tm = time.time()
+	for i in range(len(lista1)):
+		factorizacion_pollard(lista1[i])
+	return time.time() - tm
 
 
