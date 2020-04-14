@@ -188,146 +188,125 @@ def factorizacion_fermat(n):
 
 def factorizacion_pollard(n):
 
-	x = 1
-	y = 2
+    x = 1
+    y = 2
 
-	
-	if n % 3 == 0: 
-		a = n // 3
-		divisores = [3, a]
-			
-		#Si a es primo, los devuelvo. Si no, hago recursivamente la factorización.
-		if not test_MillerRabin(a, 20):
-			a = factorizacion_pollard(a)
-			return divisores
-		
-		elif n % 5 == 0:
-			a = n // 5
-			divisores = [5, a]
-
-			#Si a es primo, los devuelvo. Si no, hago recursivamente la factorización.
-			if not test_MillerRabin(a, 20):
-				a = factorizacion_pollard(a)
-
-			return divisores
-
-		elif n % 7 == 0:
-			a = n // 7
-			divisores = [7, a]
-
-			#Si a es primo, los devuelvo. Si no, hago recursivamente la factorización.
-			if not test_MillerRabin(a, 20):
-				a = factorizacion_pollard(a)
-
-			return divisores
-
-
-	
-	p = raiz(n)
-	# start = time.clock() LA MEDICIÓN DE TIEMPOS SE HACE FUERA DE LA FUNCIÓN
-	while p:
-	
-		a = mcd(y-x, n)
-        
-		#Si el MCD no es ni 1 ni n, entonces el numero que sale es divisor de n
-		if a != 1 and a != n:
+    # Veo primero si n es divisible por los primos más pequeños
+    small_primes = [3,5,7]
+    
+    for p in small_primes:
+        if n % p == 0:
+            divisores = [p, n // p]
             
-			#b será el otro divisor
-			b = n // a
-			divisores = [b, a]
-        
-			#Si son primos, los devuelvos. Si no, hago recursivamente la factorización.
-			if not test_MillerRabin(divisores[0], 20):
-				divisores[0] = factorizacion_pollard(divisores[0])
+            # Compruebo si n // p es primo y, si no lo es, lo factorizo
+            if not test_MillerRabin(divisores[1], 20):
+                divisores[1] = factorizacion_pollard(divisores[1])
 
-			if not test_MillerRabin(divisores[1], 20):
-				divisores[1] = factorizacion_pollard(divisores[1])
-			
-			#print(time.clock() - start)
-			return divisores
+            return divisores
+ 
+    p = raiz(n)
+    while p:
+
+        a = mcd(y-x, n)
+        
+        #Si el MCD no es ni 1 ni n, entonces el numero que sale es divisor de n
+        if a != 1 and a != n:
+            
+            #b será el otro divisor
+            b = n // a
+            divisores = [b, a]
+        
+            #Si son primos, los devuelvos. Si no, hago recursivamente la factorización.
+            if not test_MillerRabin(divisores[0], 20):
+                divisores[0] = factorizacion_pollard(divisores[0])
+
+            if not test_MillerRabin(divisores[1], 20):
+                divisores[1] = factorizacion_pollard(divisores[1])
+            
+            return divisores
                  
-		#Si el mcd es 1, intento con otros numeros (la función f (x) que aumenta x y y es: f(x) = (x ** 2 + 1) mód n)
-		x = (x ** 2 + 1) % n
-		
-		for i in range(2):
-			y = (y ** 2 + 1) % n
-		
-		p =- 1
+        #Si el mcd es 1, intento con otros numeros (la función f (x) que aumenta x y y es: f(x) = (x ** 2 + 1) mód n)
+        x = (x ** 2 + 1) % n
+        
+        for i in range(2):
+            y = (y ** 2 + 1) % n
+        
+        p -= 1
 
 
 # ------------ Funciones para el logarítmo discreto -------------
 
 def ld_fuerzabruta(a,b,p):
-	for i in range(p-1):
-	    x=potencia_modular(a,i,p)
-	    if(x==b):
-	        return i
-	    if(x==1 and i!=0):
-	        return "No hay solución."
+    for i in range(p-1):
+        x=potencia_modular(a,i,p)
+        if(x==b):
+            return i
+        if(x==1 and i!=0):
+            return "No hay solución."
 
 
 
 def ld_pasoenanogigante(a,b,p):
 
-	s = raiz(p) + 1 
-	sol = []
-	#Pongo b en la lista
-	sol.append(b % p)
+    s = raiz(p) + 1 
+    sol = []
+    #Pongo b en la lista
+    sol.append(b % p)
 
-	#Pongo todos los numeros desde b * a hasta b * (a ** (s - 1)) en la lista 
-	for i in range(s-1):
-		sol.append(sol[i] * a % p)
+    #Pongo todos los numeros desde b * a hasta b * (a ** (s - 1)) en la lista 
+    for i in range(s-1):
+        sol.append(sol[i] * a % p)
 
-	#Ahora desde aquí vamos calculando n desde a ** s hasta a ** (s * s), y tenemos t como contador para ver hasta que no encontramos n = sol[i]
-	n = (a ** s) % p
-	t = 1
-	while t != s:
-		for i in range(len(sol)):
-			if sol[i] == n:
+    #Ahora desde aquí vamos calculando n desde a ** s hasta a ** (s * s), y tenemos t como contador para ver hasta que no encontramos n = sol[i]
+    n = (a ** s) % p
+    t = 1
+    while t != s:
+        for i in range(len(sol)):
+            if sol[i] == n:
 
-				#Si lo encontramos, returnamos el resultado del logaritmo com t * s - i
-				x = t * s - i
-				return x
-		n = (n * (a ** s)) % p
-		t += 1
-	print("No existe el numero")
-	return
+                #Si lo encontramos, returnamos el resultado del logaritmo com t * s - i
+                x = t * s - i
+                return x
+        n = (n * (a ** s)) % p
+        t += 1
+    print("No existe el numero")
+    return
 
 
 # ------------ Funciones para el Análisis de Tiempo -------------
 
 def analisis_tiempos_ldfuerza(lista1 = [[],[],[]]):
-	tm = time.time()
-	for i in range(len(lista1)):
-	    print(ld_fuerzabruta(lista1[i][0],lista1[i][1],lista1[i][2]))
-	    print(time.time() - tm)
+    tm = time.time()
+    for i in range(len(lista1)):
+        print(ld_fuerzabruta(lista1[i][0],lista1[i][1],lista1[i][2]))
+        print(time.time() - tm)
 
 def analisis_tiempos_ldpaso(lista1 = [[],[],[]]):
-	tm = time.time()
-	for i in range(len(lista1)):
-	    ld_pasoenanogigante(lista1[i][0],lista1[i][1],lista1[i][2])
-	    print(time.time() - tm)
+    tm = time.time()
+    for i in range(len(lista1)):
+        ld_pasoenanogigante(lista1[i][0],lista1[i][1],lista1[i][2])
+        print(time.time() - tm)
 
 def analisis_tiempos_fb(lista1 = []):
-	tm = time.time()
-	for i in range(len(lista1)):
-		factorizacion_tentativa(lista1[i])
-	return (time.time() - tm) / 10
+    tm = time.time()
+    for i in range(len(lista1)):
+        factorizacion_tentativa(lista1[i])
+    return (time.time() - tm) / 10
 
 
 
 def analisis_tiempos_fermat(lista1 = []):
-	tm = time.time()
-	for i in range(len(lista1)):
-		factorizacion_fermat(lista1[i])
-	return (time.time() - tm) / 10
+    tm = time.time()
+    for i in range(len(lista1)):
+        factorizacion_fermat(lista1[i])
+    return (time.time() - tm) / 10
 
 
 
 def analisis_tiempos_pollard(lista1 = []):
-	tm = time.time()
-	for i in range(len(lista1)):
-		factorizacion_pollard(lista1[i])
-	return (time.time() - tm) / 10
+    tm = time.time()
+    for i in range(len(lista1)):
+        factorizacion_pollard(lista1[i])
+    return (time.time() - tm) / 10
 
 
