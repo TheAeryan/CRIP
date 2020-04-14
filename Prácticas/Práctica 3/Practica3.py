@@ -14,6 +14,7 @@ import math
 from random import randint
 import time
 import matplotlib.pyplot as trx
+import numpy as np
 
 # ------------ Funciones auxiliares ----------------
 
@@ -71,9 +72,9 @@ Genera una lista de n números compuestos de "num_cifras". Todos los números me
 uno se generan eligiendo un número impar al azar de num_cifras y comprobando que no es
 primo. El otro número, se elige como múltiplo de dos números primos de num_cifras // 2. 
 """   
-def generar_compuestos_num_cifras(num_cifras, n=10): 
+def generar_compuestos_num_cifras(num_cifras, n=5): 
     lista_nums = []
-    
+    """
     # Creo el compuesto como producto de primos
     num_cif_primos = num_cifras // 2
     
@@ -88,7 +89,7 @@ def generar_compuestos_num_cifras(num_cifras, n=10):
             primos.append(x)
             
     lista_nums.append(primos[0]*primos[1])
-    
+    """
     # Creo el resto de números compuestos
     while len(lista_nums) < n:
         x = randint(10**(num_cifras-1), 10**num_cifras)
@@ -97,6 +98,30 @@ def generar_compuestos_num_cifras(num_cifras, n=10):
         if x % 2 == 1 and not test_MillerRabin(x, 20):
             lista_nums.append(x)
             
+    return lista_nums
+
+def generar_compuestos_num_cifras_primos(num_cifras): 
+    lista_nums = []
+    
+    # Creo el compuesto como producto de primos
+    num_cif_primos = num_cifras // 2
+    
+    # Elijo a dos primos aleatorios de num_cif_primos
+    primos = []
+    
+    while len(primos) < 10:
+        x = randint(10**(num_cif_primos-1), 10**num_cif_primos)
+        
+        # Compruebo si x es primo con el Test de Miller-Rabin con 20 testigos
+        if test_MillerRabin(x, 20):
+            primos.append(x)
+            
+    lista_nums.append(primos[0]*primos[1])
+    lista_nums.append(primos[2]*primos[3])
+    lista_nums.append(primos[4]*primos[5])
+    lista_nums.append(primos[6]*primos[7])
+    lista_nums.append(primos[8]*primos[9])
+    
     return lista_nums
     
 """
@@ -291,7 +316,7 @@ def analisis_tiempos_fb(lista1 = []):
     tm = time.time()
     for i in range(len(lista1)):
         factorizacion_tentativa(lista1[i])
-    return (time.time() - tm) / 10
+    return (time.time() - tm) / 5
 
 
 
@@ -299,7 +324,7 @@ def analisis_tiempos_fermat(lista1 = []):
     tm = time.time()
     for i in range(len(lista1)):
         factorizacion_fermat(lista1[i])
-    return (time.time() - tm) / 10
+    return (time.time() - tm) / 5
 
 
 
@@ -307,6 +332,38 @@ def analisis_tiempos_pollard(lista1 = []):
     tm = time.time()
     for i in range(len(lista1)):
         factorizacion_pollard(lista1[i])
-    return (time.time() - tm) / 10
+    return (time.time() - tm) / 5
 
+
+lista5 = [46191, 88369, 49651, 48159, 20609]
+lista6 = [846979, 599721, 721071, 950975, 346295]
+lista7 = [3239807, 2668751, 4868331, 6064247, 7183551]
+lista8 = [46447573, 97961455, 61520637, 63582589, 37953139]
+lista9 = [957589949, 285993255, 200223675, 993727427, 154075407]
+lista10 = [3945148065, 2077524455, 1410741741, 3013455917, 7712733825]
+lista15 = [913317468542225, 748978625210683, 211935444719693, 390393118631019, 575899868400667]
+lista20 = [51604320814203832237, 63298031496990993641, 93152113314002488709, 82094134748542079777, 42668303529324435681]
+lista25 = [5753781489398154520077575, 1568839284256802316822443, 1034216747782422372712111, 7204306301536692130224763, 4495855547372823594773827]
+
+
+lista5_primos = [1577, 4757, 4559, 3071, 1007]
+lista6_primos = [87847, 87271, 316159, 19511, 188561]
+lista7_primos = [359893, 489347, 19879, 88163, 509017]
+lista8_primos = [8241241, 29590747, 60880739, 35470933, 31341451]
+lista9_primos = [34384457, 21894469, 8318159, 10381381, 52533491]
+lista10_primos = [5826457841, 1791424123, 8435622953, 2990599379, 698162891]
+lista15_primos = [70729893669023, 79693862188417, 11119413525721, 37723912694123, 27222054586633]
+lista20_primos = [23832700531121320493, 32067152828622175193, 64838294355389912957, 77731138202499790837, 33423477292403677723]
+
+#Los tiempos fuerza bruta no funcionan con numeros productos de primos de 20 cifras!
+tiempos_fb_primos = [4.3010711669921876e-05, 5.3310394287109374e-05, 5.588531494140625e-05, 0.00019121170043945312, 0.0001750946044921875, 0.0022908687591552735, 0.25174527168273925]
+tiempos_fb = [6.75201416015625e-05, 6.914138793945312e-05, 6.999969482421876e-05, 9.055137634277344e-05, 0.00010294914245605469, 0.00018744468688964845, 0.015476179122924805, 0.02575058937072754, 1.7505939483642579]
+
+# Los tiempos fermat no funcionan con numeros de 10 cifras!
+tiempos_fermat = []
+tiempos_fermat_primos = []
+
+#Los tiempos de pollard no funcionan con numeros
+tiempos_pollard = []
+tiempos_pollard_primos = []
 
