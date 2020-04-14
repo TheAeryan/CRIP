@@ -271,7 +271,6 @@ def ld_pasoenanogigante(a,b,p):
 
 	s = raiz(p) + 1 
 	sol = []
-	
 	#Pongo b en la lista
 	sol.append(b % p)
 
@@ -288,11 +287,9 @@ def ld_pasoenanogigante(a,b,p):
 
 				#Si lo encontramos, returnamos el resultado del logaritmo com t * s - i
 				x = t * s - i
-				print(time.clock() - start)
 				return x
 		n = (n * (a ** s)) % p
 		t += 1
-
 	print("No existe el numero")
 	return
 
