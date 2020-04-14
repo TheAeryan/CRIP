@@ -223,7 +223,7 @@ def factorizacion_pollard(n):
 
 
 	
-	p = sqrt(n)
+	p = raiz(n)
 	# start = time.clock() LA MEDICIÓN DE TIEMPOS SE HACE FUERA DE LA FUNCIÓN
 	while p:
 	
@@ -303,7 +303,7 @@ def analisis_tiempos_fb(lista1 = []):
 	tm = time.time()
 	for i in range(len(lista1)):
 		factorizacion_tentativa(lista1[i])
-	return time.time() - tm
+	return (time.time() - tm) / 10
 
 
 
@@ -311,14 +311,14 @@ def analisis_tiempos_fermat(lista1 = []):
 	tm = time.time()
 	for i in range(len(lista1)):
 		factorizacion_fermat(lista1[i])
-	return time.time() - tm
+	return (time.time() - tm) / 10
 
 
 
-def analisis_tiempos3_pollard(lista1 = []):
+def analisis_tiempos_pollard(lista1 = []):
 	tm = time.time()
 	for i in range(len(lista1)):
 		factorizacion_pollard(lista1[i])
-	return time.time() - tm
+	return (time.time() - tm) / 10
 
 
