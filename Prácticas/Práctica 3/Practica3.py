@@ -272,7 +272,6 @@ def ld_pasoenanogigante(a,b,p):
 	s = raiz(p) + 1 
 	sol = []
 	
-	start = time.clock()
 	#Pongo b en la lista
 	sol.append(b % p)
 
@@ -294,7 +293,6 @@ def ld_pasoenanogigante(a,b,p):
 		n = (n * (a ** s)) % p
 		t += 1
 
-	print(time.clock() - start)
 	print("No existe el numero")
 	return
 
@@ -311,7 +309,7 @@ def analisis_tiempos_ldpaso(lista1 = [[],[],[]]):
 	tm = time.time()
 	for i in range(len(lista1)):
 	    ld_pasoenanogigante(lista1[i][0],lista1[i][1],lista1[i][2])
-	return time.time() - tm	
+	    print(time.time() - tm)
 
 def analisis_tiempos_fb(lista1 = []):
 	tm = time.time()
