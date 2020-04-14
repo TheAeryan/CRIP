@@ -307,6 +307,11 @@ def analisis_tiempos_ldfuerza(lista1 = [[],[],[]]):
 	    ld_fuerzabruta(lista1[i][0],lista1[i][1],lista1[i][2])
 	return time.time() - tm
 
+def analisis_tiempos_ldpaso(lista1 = [[],[],[]]):
+	tm = time.time()
+	for i in range(len(lista1)):
+	    ld_pasoenanogigante(lista1[i][0],lista1[i][1],lista1[i][2])
+	return time.time() - tm	
 
 def analisis_tiempos_fb(lista1 = []):
 	tm = time.time()
