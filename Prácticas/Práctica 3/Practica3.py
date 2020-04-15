@@ -269,8 +269,6 @@ def ld_fuerzabruta(a,b,p):
         if(x==1 and i!=0):
             return "No hay solución."
 
-
-
 def ld_pasoenanogigante(a,b,p):
 
     s = raiz(p) + 1 
@@ -297,6 +295,34 @@ def ld_pasoenanogigante(a,b,p):
     print("No existe el numero")
     return
 
+def ld_pollard(a,b,p):
+    x,al,bet=[],[],[]
+    x.append(1)
+    al.append(0)
+    bet.append(0)
+    for i in range(30): 
+        if x[i]%3==0:
+            x.append((x[i]*x[i])%p)
+            al.append((2*al[i])%(p-1))
+            bet.append((2*bet[i])%(p-1))
+        elif x[i]%3==1:
+            x.append(x[i]*b%p)
+            al.append(al[i])
+            bet.append(bet[i]+1)
+        else:    
+            x.append(x[i]*a%p)
+            al.append(al[i]+1)
+            bet.append(bet[i])
+        if i% 2 == 0: 
+            x1=int(i/2)
+            if x[i]==x[x1] and i!=0 : #Comparación entre i y 2i
+                B,A=0,0
+                B=bet[i]-bet[x1]  #Se genera la congruencia
+                A=al[x1]-al[i]
+                sol=congruencia(B,A,(p-1)) #Se soluciona la congruencia
+                for i in range(len(sol)):
+                    if (potencia_modular(a, sol[i], p))==b: #Se evaluan las posibles soluciones de la congruencia para el log
+                        return sol[i]
 
 # ------------ Funciones para el Análisis de Tiempo -------------
 
@@ -311,7 +337,13 @@ def analisis_tiempos_ldpaso(lista1 = [[],[],[]]):
     for i in range(len(lista1)):
         ld_pasoenanogigante(lista1[i][0],lista1[i][1],lista1[i][2])
         print(time.time() - tm)
-
+        
+def analisis_tiempos_ld_pollard(lista1 = [[],[],[]]):
+	tm = time.time()
+	for i in range(len(lista1)):
+	    print(ld_pollard(lista1[i][0],lista1[i][1],lista1[i][2]))
+	    print(time.time() - tm)
+        
 def analisis_tiempos_fb(lista1 = []):
     tm = time.time()
     for i in range(len(lista1)):
