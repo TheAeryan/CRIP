@@ -13,7 +13,7 @@ from Practica1 import *
 import math
 from random import randint
 import time
-import matplotlib.pyplot as plt
+import matplotlib.pyplot as trx
 import numpy as np
 
 # ------------ Funciones auxiliares ----------------
@@ -263,7 +263,7 @@ def factorizacion_pollard(n):
 
 def ld_fuerzabruta(a,b,p):
     for i in range(p-1):
-        x=potencia_modular(a,i,p)
+        x=potencia_modular(a,i,p) #CALCULAR EL ANTERIOR
         if(x==b):
             return i
         if(x==1 and i!=0):
@@ -281,7 +281,8 @@ def ld_pasoenanogigante(a,b,p):
         sol.append(sol[i] * a % p)
 
     #Ahora desde aquí vamos calculando n desde a ** s hasta a ** (s * s), y tenemos t como contador para ver hasta que no encontramos n = sol[i]
-    n = (a ** s) % p
+    aux = a ** s
+    n = aux % p #UTILIZAR POTENCIA MODULAR
     t = 1
     while t != s:
         for i in range(len(sol)):
@@ -290,11 +291,12 @@ def ld_pasoenanogigante(a,b,p):
                 #Si lo encontramos, returnamos el resultado del logaritmo com t * s - i
                 x = t * s - i
                 return x
-        n = (n * (a ** s)) % p
+        n = n * (aux) % p #UTILIZZARE ALTRA VARIABILE
         t += 1
     print("No existe el numero")
     return
 
+#CONSUMA MEMORIA, EL LIMITE 30 ES PEQUEÑO
 def ld_pollard(a,b,p):
     x,al,bet=[],[],[]
     x.append(1)
@@ -421,4 +423,15 @@ tiempos_pollard = [0.0004434108734130859, 0.0004404544830322266, 0.0006488800048
 # 30 cifras
 tiempos_pollard_primos = [0.00038447380065917967, 0.0005166053771972657, 0.0005702972412109375, 0.0008878707885742188, 0.00022954940795898436, 0.0015295982360839845, 0.006908845901489258, 0.2487804889678955, 0.20681509971618653, 0.8142501831054687, 0.8326740741729737, 2.2809261322021483]
 
+
+x = [5,6,7,8,9,10,15,20,25,26,27]
+
+
+trx.figure(num=1)
+trx.xlabel("Cifras")
+trx.ylabel("Tiempo (s)")
+trx.ylim(0,20)
+trx.plot(x,tiempos_fb)
+trx.legend(loc="lower right")
+trx.show()
 
