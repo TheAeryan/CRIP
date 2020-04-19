@@ -263,10 +263,11 @@ def factorizacion_pollard(n):
 
 def ld_fuerzabruta(a,b,p):
     for i in range(p-1):
-        x=potencia_modular(a,i,p) #CALCULAR EL ANTERIOR
-        if(x==b):
+        x1=potencia_modular(b,1,p)
+        x=potencia_modular(a,i,p)
+        if(x==x1):
             return i
-        if(x==1 and i!=0):
+        if(x1==1 and i!=0):
             return "No hay solución."
 
 def ld_pasoenanogigante(a,b,p):
@@ -302,7 +303,7 @@ def ld_pollard(a,b,p):
     x.append(1)
     al.append(0)
     bet.append(0)
-    for i in range(30): 
+    for i in range(p): 
         if x[i]%3==0:
             x.append((x[i]*x[i])%p)
             al.append((2*al[i])%(p-1))
@@ -367,6 +368,8 @@ def analisis_tiempos_pollard(lista1 = []):
     for i in range(len(lista1)):
         factorizacion_pollard(lista1[i])
     return (time.time() - tm) / 5
+lista=[5,2,7],[61,34,47],[320,240,193],[4320,7240,1613],[53205,62407,39581],[753205,853407,465901],[8753209,1853401,6561437],[18753208,61853403,15484247],[238763200,751803489,957833221]
+
 
 
 lista5 = [46191, 88369, 49651, 48159, 20609]
