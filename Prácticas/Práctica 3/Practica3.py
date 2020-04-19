@@ -297,13 +297,12 @@ def ld_pasoenanogigante(a,b,p):
     print("No existe el numero")
     return
 
-#CONSUMA MEMORIA, EL LIMITE 30 ES PEQUEÑO
 def ld_pollard(a,b,p):
     x,al,bet=[],[],[]
     x.append(1)
     al.append(0)
     bet.append(0)
-    for i in range(p): 
+    for i in range(p-1): 
         if x[i]%3==0:
             x.append((x[i]*x[i])%p)
             al.append((2*al[i])%(p-1))
@@ -324,7 +323,8 @@ def ld_pollard(a,b,p):
                 A=al[x1]-al[i]
                 sol=congruencia(B,A,(p-1)) #Se soluciona la congruencia
                 for i in range(len(sol)):
-                    if (potencia_modular(a, sol[i], p))==b: #Se evaluan las posibles soluciones de la congruencia para el log
+                    bo=potencia_modular(b,1,p)
+                    if (potencia_modular(a, sol[i], p))==bo: #Se evaluan las posibles soluciones de la congruencia para el log
                         return sol[i]
 
 # ------------ Funciones para el Análisis de Tiempo -------------
