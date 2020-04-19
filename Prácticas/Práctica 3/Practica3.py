@@ -443,7 +443,7 @@ trx.plot(xfb,tiempos_fb)
 trx.legend(loc="lower right")
 trx.title('Analisis de los tiempos de Fuerza Bruta con numeros al azar')
 trx.show()
-"""
+
 
 trx.figure(num=2)
 trx.xlabel("Cifras")
@@ -494,3 +494,5 @@ trx.plot(xpollard_primos,tiempos_pollard_primos)
 trx.legend(loc="lower right")
 trx.title('Analisis de los tiempos de Pollard con numeros productos de primos')
 trx.show()
+
+"""
