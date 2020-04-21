@@ -368,9 +368,13 @@ def analisis_tiempos_pollard(lista1 = []):
     for i in range(len(lista1)):
         factorizacion_pollard(lista1[i])
     return (time.time() - tm) / 5
-lista=[5,2,7],[61,34,47],[320,240,193],[4320,7240,1613],[53205,62407,39581],[753205,853407,465901],[8753209,1853401,6561437],[18753208,61853403,15484247],[238763200,751803489,957833221]
+lista=[5,2,7],[61,34,47],[320,240,193],[4320,7240,1613],[53205,62407,39581],[753205,853407,465901],[8753209,1853401,6561437],[18753208,61853403,15484247],[238763200,751803489,957833221],[9238763200,8751803410,2111511013]        
 
-
+tiempo_ldfuerza=[0.002000093460083008,0.009000301361083984,0.016000032424926758,0.025000333786010742,0.12840008735656738,3.954200029373169,25.077800273895264,97.6502001285553]
+tiempo_ldpaso=[0.015599966049194336,0.015599966049194336,0.015599966049194336,0.031200170516967773,0.031200170516967773,0.07800006866455078,0.32760000228881836,0.9828000068664551,121.01119995117188,191.29220008850098]
+tiempo_ldpollard=[0.003000020980834961,0.0060002803802490234,0.013000011444091797,0.015600204467773438,0.031200170516967773,0.031200170516967773,0.062400102615356445,0.09360027313232422,0.2964000701904297,0.3119997978210449]
+xld_pp = [1,2,3,4,5,6,7,8,9,10]
+xld_f= [1,2,3,4,5,6,7,8]
 
 lista5 = [46191, 88369, 49651, 48159, 20609]
 lista6 = [846979, 599721, 721071, 950975, 346295]
@@ -495,4 +499,30 @@ trx.legend(loc="lower right")
 trx.title('Analisis de los tiempos de Pollard con numeros productos de primos')
 trx.show()
 
+    trx.figure(num=9)
+    trx.xlabel("Cifras")
+    trx.ylabel("Tiempo (s)")
+    trx.ylim(0,0.5)
+    trx.plot(xld_pp,tiempo_ldpollard)
+    trx.legend(loc="lower right")
+    trx.title('Análisis de tiempo para la solución de Logaritmo Discreto con Pollard ')
+    trx.show()
+
+    trx.figure(num=8)
+    trx.xlabel("Cifras")
+    trx.ylabel("Tiempo (s)")
+    trx.ylim(0,1)
+    trx.plot(xld_pp,tiempo_ldpaso)
+    trx.legend(loc="lower right")
+    trx.title('Análisis de tiempo para la solución de Logaritmo Discreto con Paso Enano ')
+    trx.show()
+
+    trx.figure(num=7)
+    trx.xlabel("Cifras")
+    trx.ylabel("Tiempo (s)")
+    trx.ylim(0,100)
+    trx.plot(xld_f,tiempo_ldfuerza)
+    trx.legend(loc="lower right")
+    trx.title('Análisis de tiempo para la solución de Logaritmo Discreto con Fuerza Bruta ')
+    trx.show()
 """
