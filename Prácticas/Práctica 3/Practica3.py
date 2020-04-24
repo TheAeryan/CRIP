@@ -499,7 +499,7 @@ xfermat_primos = [5, 6, 7, 8, 9, 10, 15, 16, 17, 18]
 xpollard = [5, 6, 7, 8, 9, 10, 15, 20, 25, 30, 35, 40, 41]
 xpollard_primos = [5, 6, 7, 8, 9, 10, 15, 20, 22, 23, 25, 26, 27, 28, 29, 30]
 
-
+"""
 trx.figure(num=1)
 trx.xlabel("Cifras")
 trx.ylabel("Tiempo (s)")
@@ -588,5 +588,5 @@ trx.plot(xld_f, tiempo_ldfuerza)
 trx.legend(loc="lower right")
 trx.title('Análisis de tiempo para la solución de Logaritmo Discreto con Fuerza Bruta ')
 trx.show()
-
+"""
 
