@@ -12,7 +12,7 @@ Código asociado a la tercera práctica de Criptografía y Computación.
 import time
 from random import randint
 import numpy as np
-import matplotlib as trx
+import matplotlib.pyplot as trx
 from Practica1 import *
 
 
@@ -492,14 +492,14 @@ tiempos_pollard_primos = [0.000609445571899414, 0.0005429744720458985, 0.0008871
                           9.842744874954224, 26.54191737174988, 38.85830988883972, 98.68661375045777]
 
 
-xfb = [5, 6, 7, 8, 9, 10, 15, 20, 25, 26, 27]
-xfb_primos = [5, 6, 7, 8, 9, 10, 15, 16, 17, 18, 19]
+xfb = [5, 6, 7, 8, 9, 10, 15, 20, 25, 26, 27, 28]
+xfb_primos = [5, 10, 15, 16, 17, 18, 19, 20]
 xfermat = [5, 6, 7, 8, 9, 10]
-xfermat_primos = [5, 6, 7, 8, 9, 10, 15, 20]
+xfermat_primos = [5, 6, 7, 8, 9, 10, 15, 16, 17, 18]
 xpollard = [5, 6, 7, 8, 9, 10, 15, 20, 25, 30, 35, 40, 41]
-xpollard_primos = [5, 6, 7, 8, 9, 10, 15, 20, 25, 26, 27, 28]
+xpollard_primos = [5, 6, 7, 8, 9, 10, 15, 20, 22, 23, 25, 26, 27, 28, 29, 30]
 
-"""
+
 trx.figure(num=1)
 trx.xlabel("Cifras")
 trx.ylabel("Tiempo (s)")
@@ -589,4 +589,4 @@ trx.legend(loc="lower right")
 trx.title('Análisis de tiempo para la solución de Logaritmo Discreto con Fuerza Bruta ')
 trx.show()
 
-"""
+
