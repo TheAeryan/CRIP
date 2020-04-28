@@ -7,6 +7,8 @@ Created on Mon Apr 27 21:37:21 2020
 
 import numpy as np
 
+# Factorización
+
 # Los tiempos fuerza bruta no funcionan con numeros productos de primos de 28 cifras!
 tiempos_fb = [0.016902446746826172, 0.02760634422302246,
               1.339552402496338, 2.5072630405426026, 4.927287149429321, 63.68463110923767]
@@ -52,8 +54,30 @@ pollard_primos_cif_ini = 9
 aumento_pollard_primos = 3.726188474557196
 estim_pollard_primos = 2.9305515186779655e+20
 
+# Problema del Logaritmo Discreto
+
+
+tiempo_ldfuerza = [0.002000093460083008, 0.009000301361083984, 0.016000032424926758, 0.025000333786010742,
+                   0.12840008735656738, 3.954200029373169, 25.077800273895264, 97.6502001285553]
+aumento_ldfuerza = 7.715428737711462
+estim_ldfuerza = 6.049137297025345e+40 # Estimación para números de 50 cifras, en segundos
+
+tiempo_ldpaso = [0.015599966049194336, 0.015599966049194336, 0.015599966049194336, 0.031200170516967773,
+                 0.031200170516967773, 0.07800006866455078, 0.32760000228881836, 0.9828000068664551, 121.01119995117188,
+                 191.29220008850098]
+aumento_ldpaso = 15.48997770287642
+estim_ldpaso = 3.2034097360818825e+56
+
+tiempo_ldpollard = [0.003000020980834961, 0.0060002803802490234, 0.013000011444091797, 0.015600204467773438,
+                    0.031200170516967773, 0.031200170516967773, 0.062400102615356445, 0.09360027313232422,
+                    0.2964000701904297, 0.3119997978210449]
+aumento_ldpollard = 1.7873254759753994
+estim_ldpollard = 6840737595
+
 # -----------------------------------------------------------------------------
 
+# Devuelve cuánto aumenta el tiempo de media al intentar aplicar el mismo algoritmo a un número
+# con una cifra más
 def regresion_exponencial(lista_tiempos):
     l_t = np.array(lista_tiempos)
     aumentos_tiempos = l_t[1:] / l_t[:-1]
@@ -61,6 +85,7 @@ def regresion_exponencial(lista_tiempos):
     
     return media_aumentos
 
+# Estima cuánto tardará el algoritmo al ser aplicado a un número con "cifras_finales" cifras
 def estimacion_tiempo_exponencial(cifras_iniciales, cifras_finales, tiempo_inicial, media_aumento_tiempos):
     num_aumentos = cifras_finales-cifras_iniciales
     
