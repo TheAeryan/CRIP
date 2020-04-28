@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019) (preloaded format=pdflatex 2019.12.13)  24 APR 2020 21:10
+This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019) (preloaded format=pdflatex 2019.12.13)  28 APR 2020 00:57
 entering extended mode
  \write18 enabled.
  %&-line parsing enabled.
@@ -96,16 +96,16 @@ LaTeX Font Info:    External font `cmex10' loaded for size
 
 {/usr/local/texlive/2019/texmf-var/fonts/map/pdftex/updmap/pdftex.map}]
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <7> on input line 24.
+(Font)              <7> on input line 28.
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <5> on input line 24.
+(Font)              <5> on input line 28.
 <Figure_1.png, id=9, 1339.1631pt x 714.7503pt>
 File: Figure_1.png Graphic file (type png)
 <use Figure_1.png>
-Package pdftex.def Info: Figure_1.png  used on input line 31.
+Package pdftex.def Info: Figure_1.png  used on input line 34.
 (pdftex.def)             Requested size: 401.75203pt x 214.42674pt.
 
-Overfull \hbox (56.75203pt too wide) in paragraph at lines 31--32
+Overfull \hbox (56.75203pt too wide) in paragraph at lines 34--35
  [][] 
  []
 
@@ -113,10 +113,10 @@ Overfull \hbox (56.75203pt too wide) in paragraph at lines 31--32
 <Figure_3.png, id=16, 1339.1631pt x 714.7503pt>
 File: Figure_3.png Graphic file (type png)
 <use Figure_3.png>
-Package pdftex.def Info: Figure_3.png  used on input line 44.
+Package pdftex.def Info: Figure_3.png  used on input line 47.
 (pdftex.def)             Requested size: 401.75203pt x 214.42674pt.
 
-Overfull \hbox (56.75203pt too wide) in paragraph at lines 44--45
+Overfull \hbox (56.75203pt too wide) in paragraph at lines 47--48
  [][] 
  []
 
@@ -124,10 +124,10 @@ Overfull \hbox (56.75203pt too wide) in paragraph at lines 44--45
 <Figure_5.png, id=23, 1339.1631pt x 714.7503pt>
 File: Figure_5.png Graphic file (type png)
 <use Figure_5.png>
-Package pdftex.def Info: Figure_5.png  used on input line 67.
+Package pdftex.def Info: Figure_5.png  used on input line 62.
 (pdftex.def)             Requested size: 401.75203pt x 214.42674pt.
 
-Overfull \hbox (56.75203pt too wide) in paragraph at lines 67--68
+Overfull \hbox (56.75203pt too wide) in paragraph at lines 62--63
  [][] 
  []
 
@@ -135,30 +135,30 @@ Overfull \hbox (56.75203pt too wide) in paragraph at lines 67--68
 <Figure_2.png, id=29, 1339.1631pt x 714.7503pt>
 File: Figure_2.png Graphic file (type png)
 <use Figure_2.png>
-Package pdftex.def Info: Figure_2.png  used on input line 80.
+Package pdftex.def Info: Figure_2.png  used on input line 75.
 (pdftex.def)             Requested size: 401.75203pt x 214.42674pt.
 
-Overfull \hbox (56.75203pt too wide) in paragraph at lines 80--81
+Overfull \hbox (56.75203pt too wide) in paragraph at lines 75--76
  [][] 
  []
 
 <Figure_4.png, id=30, 1339.1631pt x 714.7503pt>
 File: Figure_4.png Graphic file (type png)
 <use Figure_4.png>
-Package pdftex.def Info: Figure_4.png  used on input line 87.
+Package pdftex.def Info: Figure_4.png  used on input line 82.
 (pdftex.def)             Requested size: 401.75203pt x 214.42674pt.
 
-Overfull \hbox (56.75203pt too wide) in paragraph at lines 87--88
+Overfull \hbox (56.75203pt too wide) in paragraph at lines 82--83
  [][] 
  []
 
 <Figure_6.png, id=31, 1339.1631pt x 714.7503pt>
 File: Figure_6.png Graphic file (type png)
 <use Figure_6.png>
-Package pdftex.def Info: Figure_6.png  used on input line 94.
+Package pdftex.def Info: Figure_6.png  used on input line 89.
 (pdftex.def)             Requested size: 401.75203pt x 214.42674pt.
 
-Overfull \hbox (56.75203pt too wide) in paragraph at lines 94--95
+Overfull \hbox (56.75203pt too wide) in paragraph at lines 89--90
  [][] 
  []
 
@@ -166,27 +166,27 @@ Overfull \hbox (56.75203pt too wide) in paragraph at lines 94--95
 
 LaTeX Warning: Text page 6 contains only floats.
 
-[6 </compile/Figure_4.png> </compile/Figure_6.png>] (/compile/output.aux) ) 
+[6 </compile/Figure_4.png> </compile/Figure_6.png>] [7] (/compile/output.aux) )
+ 
 Here is how much of TeX's memory you used:
  1345 strings out of 492164
  17460 string characters out of 6125314
- 82134 words of memory out of 5000000
+ 83134 words of memory out of 5000000
  5747 multiletter control sequences out of 15000+600000
  6675 words of font info for 24 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 30i,7n,27p,454b,216s stack positions out of 5000i,500n,10000p,200000b,80000s
-</us
-r/local/texlive/2019/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr
-/local/texlive/2019/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi7.pfb></usr/l
-ocal/texlive/2019/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/loc
-al/texlive/2019/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/local
-/texlive/2019/texmf-dist/fonts/type1/public/amsfonts/cm/cmr17.pfb></usr/local/t
-exlive/2019/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb></usr/local/texl
-ive/2019/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb>
-Output written on /compile/output.pdf (6 pages, 327451 bytes).
+ 30i,7n,27p,789b,216s stack positions out of 5000i,500n,10000p,200000b,80000s
+</usr/local/texlive/2019/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb><
+/usr/local/texlive/2019/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi7.pfb></u
+sr/local/texlive/2019/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr
+/local/texlive/2019/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/l
+ocal/texlive/2019/texmf-dist/fonts/type1/public/amsfonts/cm/cmr17.pfb></usr/loc
+al/texlive/2019/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb></usr/local/
+texlive/2019/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb>
+Output written on /compile/output.pdf (7 pages, 330239 bytes).
 PDF statistics:
- 64 PDF objects out of 1000 (max. 8388607)
- 36 compressed objects within 1 object stream
+ 69 PDF objects out of 1000 (max. 8388607)
+ 40 compressed objects within 1 object stream
  0 named destinations out of 1000 (max. 500000)
  31 words of extra memory for PDF output out of 10000 (max. 10000000)
 
