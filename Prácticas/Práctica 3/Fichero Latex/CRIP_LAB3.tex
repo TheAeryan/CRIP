@@ -93,8 +93,38 @@
 
     \newpage
 
+
+    \section{Estimaciones}
+    Hemos hecho una  estimación para ver cuanto tardaba cada algoritmo con un numero de 50 cifras. Lo que hemos hecho es estimar simplemente hemos dividido el tiempo para cada número de cifras entre el tiempo anterior y después hemos hecho la media. Después hemos encontrado cuánto aumenta de media el tiempo cuando se aumenta el número de cifras en 1 y hemos usado eso para estimar el tiempo para 50 cifras (no hemos usado los tiempos pequeños porque al ser tan pequeños son imprecisos).
+    Lo resultados son:
+    \begin{itemize}
+        \item Fuerza Bruta:
+        \begin{itemize}
+            \item Número de 50 cifras al azar: 1.394766457605177e+34
+            \item Número de 50 cifras producto de primos: 2.1029773066486474e+80
+        \end{itemize}
+        \item Fermat:
+        \begin{itemize}
+            \item Número de 50 cifras al azar: 2.2167256626584056e+68
+            \item Número de 50 cifras producto de primos: 4.378776394397684e+74
+        \end{itemize}
+        \item Ro de Pollard:
+        \begin{itemize}
+            \item Número de 50 cifras al azar: 5.995733542705329e+30
+            \item Número de 50 cifras producto de primos: 2.9305515186779655e+20
+        \end{itemize}
+    \end{itemize}
+
+    Como se puede ver, Pollard tarda meno en calcular el numero en ambo los metodos; Fermat tarda meno que Fuerza Bruta en numero producto de primos pero sigue siendo el peor de los tres.
+
+    \newpage
+
     \section{Conclusiones}
-    Creemos que el peor de los tres métodos es fermat: funciona peor que fuerza bruta para números al azar y cuando son producto de primos funciona mejor pero sigue siendo peor que fuerza bruta. El mejor de los tres métodos es pollard, ya que es el mejor sin importar si los números son escogidos al azar o producto de primos
+
+    A partir de esos resultados lo único que sacamos es que cualquiera de los algoritmos no son capaces de factorizar números de 50 cifras (incluso el mejor de ellos tardaría billones de años). Como se puede ver, Pollard tarda meno en calcular el numero en ambo los metodos; Fermat tarda meno que Fuerza Bruta en numero producto de primos pero sigue siendo el peor de los tres.
+
+    \newblock
+    Creemos que el peor de los tres métodos es fermat: funciona peor que fuerza bruta para números al azar y cuando son producto de primos funciona mejor pero sigue siendo peor que fuerza bruta. El mejor de los tres métodos es pollard, ya que es el mejor sin importar si los números son escogidos al azar o producto de primos.
 
 
 
