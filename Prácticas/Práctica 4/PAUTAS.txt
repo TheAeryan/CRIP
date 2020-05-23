@@ -1,0 +1,11 @@
+------------------ Generación de claves -----------------------
+
+L = 1024 (tamaño de p en bits)
+Q = 256 (si no, 160 bits) (tamaño de q en bits)
+
+Dentro del fichero de la clave privada también hay que incluir la clave pública!!! (se necesita para
+verificar la firma)
+
+q tiene que ser divisor de p-1!
+
+Para elegir alfa, solo hay que calcular g^(p-1 / q) y si no vale 1, ya tenemos el valor de alfa
