@@ -9,4 +9,3 @@ Alessandro Zito
 """
 
 # ¡Usar función resumen (h(m)) SHA-2 si es posible! (usar alguna librería)
-   

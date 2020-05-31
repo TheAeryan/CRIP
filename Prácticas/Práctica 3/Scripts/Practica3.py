@@ -11,8 +11,8 @@ Código asociado a la tercera práctica de Criptografía y Computación.
 
 import time
 from random import randint
-import numpy as np
-import matplotlib.pyplot as trx
+#import numpy as np
+#import matplotlib.pyplot as trx
 from Practica1 import *
 
 
@@ -276,12 +276,13 @@ def factorizacion_pollard(n):
 # ------------ Funciones para el logarítmo discreto -------------
 
 def ld_fuerzabruta(a, b, p):
+    x = 1
+    b = b % p
     for i in range(p - 1):
-        x1 = potencia_modular(b, 1, p)
-        x = potencia_modular(a, i, p)
-        if x == x1:
+        x = (x * a) % p
+        if x == b:
             return i
-        if x1 == 1 and i != 0:
+        if x == 1 and i != 0:
             return "No hay solución."
 
 
@@ -296,16 +297,18 @@ def ld_pasoenanogigante(a, b, p):
 
     # Ahora desde aquí vamos calculando n desde a ** s hasta a ** (s * s), y tenemos t como contador para ver hasta
     # que no encontramos n = sol[i]
-    aux = a ** s
-    n = aux % p  # UTILIZAR POTENCIA MODULAR
+    aux = potencia_modular(a, s, p)
+    n = aux
     t = 1
     while t != s:
-        for i in range(len(sol)):
-            if sol[i] == n:
-                # Si lo encontramos, returnamos el resultado del logaritmo com t * s - i
-                x = t * s - i
-                return x
-        n = n * aux % p  # UTILIZZARE ALTRA VARIABILE
+        if n in sol:
+            i = sol.index(n)
+        # for i in range(len(sol)):
+            # if sol[i] == n:
+            # Si lo encontramos, returnamos el resultado del logaritmo com t * s - i
+            x = t * s - i
+            return x
+        n = n * aux % p
         t += 1
     print("No existe el numero")
     return
@@ -330,17 +333,17 @@ def ld_pollard(a, b, p):
             al.append(al[i] + 1)
             bet.append(bet[i])
         if i % 2 == 0:
-            x1 = int(i / 2)
+            x1 = i // 2
             if x[i] == x[x1] and i != 0:  # Comparación entre i y 2i
                 B, A = 0, 0
                 B = bet[i] - bet[x1]  # Se genera la congruencia
                 A = al[x1] - al[i]
                 sol = congruencia(B, A, (p - 1))  # Se soluciona la congruencia
-                for i in range(len(sol)):
+                for j in range(len(sol)):
                     bo = potencia_modular(b, 1, p)
-                    if (potencia_modular(a, sol[i],
+                    if (potencia_modular(a, sol[j],
                                          p)) == bo:  # Se evaluan las posibles soluciones de la congruencia para el log
-                        return sol[i]
+                        return sol[j]
 
 
 # ------------ Funciones para el Análisis de Tiempo -------------

@@ -2,7 +2,7 @@
 """
 Created on Mon Apr 27 21:37:21 2020
 
-@author: carlo
+@author: Carlos
 """
 
 import numpy as np
@@ -14,7 +14,7 @@ tiempos_fb = [0.016902446746826172, 0.02760634422302246,
               1.339552402496338, 2.5072630405426026, 4.927287149429321, 63.68463110923767]
 fb_cif_ini = 11
 aumento_fb = 8.335606961167008
-estim_fb = 1.394766457605177e+34 # Estimación con 50 cifras
+estim_fb = 1.394766457605177e+34  # Estimación con 50 cifras
 
 # Los tiempos fuerza bruta no funcionan con numeros productos de primos de 20 cifras!
 tiempos_fb_primos = [0.0031428813934326174, 1.5499239921569825, 1.5408389568328857,
