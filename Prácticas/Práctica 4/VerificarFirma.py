@@ -23,4 +23,4 @@ def verificacion_firma(m, r, s):
     if r == r1:
         print('Firma Valida!')
     else:
-        print('Firma no valida!')
+        print('La firma no es valida!')
