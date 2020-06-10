@@ -16,12 +16,13 @@ from Practica1 import *
 def generacacion_firma(m):
     #Se hace el resumen del mensaje utilizando SHA-2.
     z = h.sha256(m)
+    z=int(z.hexdigest(),16)
     #Se genera un número aleatorio de 2 a q-2.
     k = randint(2,q-2)
     #Se calcula la primera parte del par de la firma.
-    r = potencia_modular(alfa, k, p) % q
+    r = (potencia_modular(alfa, k, p)) % q
     #Se calcula la segunda parte del par de la firma.
-    s = ((k ** (-1)) * (z+xr)) % q
+    s = ((z+x*r)*(pow (k,-1))) % q
     #Si r o s fuera igual a 0 se recalcula la firma.
     if (r==0 or s==0):
         generacacion_firma(m)
