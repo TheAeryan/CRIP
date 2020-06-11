@@ -9,7 +9,6 @@ Práctica 4 de Criptografía - Firma Digital
 """
 
 from hashlib import sha256
-from GenerarClaves import *
 from Practica1 import *
 
 
@@ -17,13 +16,15 @@ def verificacion_firma(m):
     nom_fich_firma = "firma.txt"
     clave_priv = "clave_priv.txt"
     with open(nom_fich_firma, "r", encoding='utf-8-sig') as fich_firma:
-        r = int(fich_firma.readline(1))
-        s = int(fich_firma.readline(2))
+        r = int(fich_firma.readline())
+        s = int(fich_firma.readline())
         fich_firma.close()
 
     with open(clave_priv, "r", encoding='utf-8-sig') as f:
-        alfa = int(f.readline(3))
-        y = int(f.readline(4))
+        p = int(f.readline())
+        q = int(f.readline())
+        alfa = int(f.readline())
+        y = int(f.readline())
         f.close()
 
     w = potencia_modular(s, -1, q)
