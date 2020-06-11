@@ -13,30 +13,32 @@ from random import randint
 from GenerarClaves import *
 from Practica1 import *
 
-def generacion_firma(m, clave_pu, clave_priv):
-    #Se lee el fichero.
-    with open(clave_priv, "r",encoding='utf-8-sig') as f:
+
+def generacion_firma(m):
+    # Se lee el fichero.
+    clave_priv = "clave_priv.txt"
+    with open(clave_priv, "r", encoding='utf-8-sig') as f:
         p = int(f.readline())
         q = int(f.readline())
         alfa = int(f.readline())
         y = int(f.readline())
         x = int(f.readline())
-    #Se hace el resumen del mensaje utilizando SHA-2.
+    # Se hace el resumen del mensaje utilizando SHA-2.
     z = h.sha256(m.encode())
-    #Se convierte el resumen a decimal para que se puedan utilizar diversas operaciones en el.
-    z=int(z.hexdigest(),16)
-    #Se genera un número aleatorio de 2 a q-2.
-    k = randint(2,q-2)
-    #Se calcula la primera parte del par de la firma.
+    # Se convierte el resumen a decimal para que se puedan utilizar diversas operaciones en el.
+    z = int(z.hexdigest(), 16)
+    # Se genera un número aleatorio de 2 a q-2.
+    k = randint(2, q - 2)
+    # Se calcula la primera parte del par de la firma.
     r = (potencia_modular(alfa, k, p)) % q
-    #Se calcula la segunda parte del par de la firma.
-    s = ((z+x*r)*(pow (k,-1))) % q
-    #Si r o s fuera igual a 0 se recalcula la firma.
-    if (r==0 or s==0):
+    # Se calcula la segunda parte del par de la firma.
+    s = ((z + x * r) * (pow(k, -1))) % q
+    # Si r o s fuera igual a 0 se recalcula la firma.
+    if r == 0 or s == 0:
         generacion_firma(m)
     else:
         nom_fich_firm = "firma.txt"
         with open(nom_fich_firm, 'w') as fich_firm:
             fich_firm.write(str(r) + '\n')
             fich_firm.write(str(s) + '\n')
-        #return r,s
+        # return r,s
