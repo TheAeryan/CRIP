@@ -63,6 +63,7 @@ with open(nom_fich_pub, 'w') as fich_pub:
     fich_pub.write(str(q) + '\n')
     fich_pub.write(str(alfa) + '\n')
     fich_pub.write(str(y))
+    fich_pub.close()
 
 # Fichero clave privada: p, q, alfa, y, x (¡contiene los parámetros de la clave pública!)
 nom_fich_priv = "clave_priv.txt"
@@ -73,3 +74,4 @@ with open(nom_fich_priv, 'w') as fich_priv:
     fich_priv.write(str(alfa) + '\n')
     fich_priv.write(str(y) + '\n')
     fich_priv.write(str(x))
+    fich_priv.close()

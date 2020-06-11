@@ -8,14 +8,17 @@ Práctica 4 de Criptografía - Firma Digital
 @author: Alessandro Zito
 """
 
-import hashlib as h
+from hashlib import sha256
 from random import randint
 from GenerarClaves import *
 from Practica1 import *
+from Practica3 import inversomodular
 
 
-def generacion_firma(m):
+def generacion_firma(mensaje):
+
     # Se lee el fichero.
+
     clave_priv = "clave_priv.txt"
     with open(clave_priv, "r", encoding='utf-8-sig') as f:
         p = int(f.readline())
@@ -23,22 +26,28 @@ def generacion_firma(m):
         alfa = int(f.readline())
         y = int(f.readline())
         x = int(f.readline())
-    # Se hace el resumen del mensaje utilizando SHA-2.
-    z = h.sha256(m.encode())
-    # Se convierte el resumen a decimal para que se puedan utilizar diversas operaciones en el.
-    z = int(z.hexdigest(), 16)
+
+    # Se hace el resumen del mensaje utilizando SHA-2 y se convierte el resumen a decimal para que se puedan utilizar
+    # diversas operaciones en el.
+
+    z = sha256(open(mensaje, "rb").read()).hexdigest()
+    z = int(z, 16)
+
     # Se genera un número aleatorio de 2 a q-2.
     k = randint(2, q - 2)
+
     # Se calcula la primera parte del par de la firma.
     r = (potencia_modular(alfa, k, p)) % q
-    # Se calcula la segunda parte del par de la firma.
-    s = ((z + x * r) * (pow(k, -1))) % q
+
+    # Se calcula la segunda parte del par de la firma con la función invernomodular(a, b)
+    s = ((z + x * r) * inversomodular(k, q)) % q
+
     # Si r o s fuera igual a 0 se recalcula la firma.
     if r == 0 or s == 0:
-        generacion_firma(m)
+        generacion_firma(mensaje)
     else:
         nom_fich_firm = "firma.txt"
         with open(nom_fich_firm, 'w') as fich_firm:
             fich_firm.write(str(r) + '\n')
             fich_firm.write(str(s) + '\n')
-        # return r,s
+            fich_firm.close()
