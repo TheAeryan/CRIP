@@ -18,6 +18,7 @@ def verificacion_firma(m, r, s):
 
     # Utilizamos la función SHA2 importando haciendo el import de libreria 'hashlib', para tener el mensaje resumido
     z = h.sha256(m)
+    z = int(z.hexdigest(), 16)
 
     # Ahora calculamos u y v, dos parametros que necesitaremos para calcular la clave r1
     u = (z * w) % q
