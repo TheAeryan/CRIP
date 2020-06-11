@@ -56,7 +56,7 @@ y = potencia_modular(alfa, x, p)
 # -- Genero los ficheros de clave pública y clave privada --
 
 # Fichero clave pública: p, q, alfa, y
-nom_fich_pub = "clave_pub.key"
+nom_fich_pub = "clave_pub.txt"
 
 with open(nom_fich_pub, 'w') as fich_pub:
     fich_pub.write(str(p) + '\n')
@@ -65,7 +65,7 @@ with open(nom_fich_pub, 'w') as fich_pub:
     fich_pub.write(str(y))
 
 # Fichero clave privada: p, q, alfa, y, x (¡contiene los parámetros de la clave pública!)
-nom_fich_priv = "clave_priv.key"
+nom_fich_priv = "clave_priv.txt"
 
 with open(nom_fich_priv, 'w') as fich_priv:
     fich_priv.write(str(p) + '\n')
