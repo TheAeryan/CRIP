@@ -9,9 +9,10 @@ Práctica 4 de Criptografía - Firma Digital
 """
 
 from hashlib import sha256
+from random import randint
+
 from Practica1 import potencia_modular
 from Practica3 import inversomodular
-from random import randint
 
 
 def generacion_firma(mensaje):
