@@ -9,45 +9,43 @@ Práctica 4 de Criptografía - Firma Digital
 """
 
 from hashlib import sha256
-from Practica1 import *
+from Practica1 import potencia_modular
 from Practica3 import inversomodular
 
+mensaje = str(input("Escribir el nombre del fichero más la estension del cuál quieres comprobar la firma: "))
+# Leemos el mensaje en binario y lo convertimos a entero (la variable mensaje sería el nombre de un cualquier
+# fichero (pdf, txt, ecc...)
+z = sha256(open(mensaje, "rb").read()).hexdigest()
+z = int(z, 16)
 
-def verificacion_firma(mensaje):
+nom_fich_firma = "firma.txt"
+clave_pub = "clave_pub.txt"
 
-    # Leemos el mensaje en binario y lo convertimos a entero (la variable mensaje sería el nombre de un cualquier
-    # fichero (pdf, txt, ecc...)
-    z = sha256(open(mensaje, "rb").read()).hexdigest()
-    z = int(z, 16)
+# Leemos los par de claves de la firma
+with open(nom_fich_firma, "r", encoding='utf-8-sig') as fich_firma:
+    r = int(fich_firma.readline())
+    s = int(fich_firma.readline())
+    fich_firma.close()
 
-    nom_fich_firma = "firma.txt"
-    clave_pub = "clave_pub.txt"
+# Leemos las claves generadas para firmar
+with open(clave_pub, "r", encoding='utf-8-sig') as f:
+    p = int(f.readline())
+    q = int(f.readline())
+    alfa = int(f.readline())
+    y = int(f.readline())
+    f.close()
 
-    # Leemos los par de claves de la firma
-    with open(nom_fich_firma, "r", encoding='utf-8-sig') as fich_firma:
-        r = int(fich_firma.readline())
-        s = int(fich_firma.readline())
-        fich_firma.close()
+w = inversomodular(s, q)
 
-    # Leemos las claves generadas para firmar
-    with open(clave_pub, "r", encoding='utf-8-sig') as f:
-        p = int(f.readline())
-        q = int(f.readline())
-        alfa = int(f.readline())
-        y = int(f.readline())
-        f.close()
+# Ahora calculamos u y v, dos parametros que necesitaremos para calcular la clave r1
+u = (z * w) % q
+v = (r * w) % q
 
-    w = inversomodular(s, q)
+# r1 será nuestra clave que vamos a comparar con r del mensaje firmado
+r1 = ((potencia_modular(alfa, u, p) * potencia_modular(y, v, p)) % p) % q
 
-    # Ahora calculamos u y v, dos parametros que necesitaremos para calcular la clave r1
-    u = (z * w) % q
-    v = (r * w) % q
-
-    # r1 será nuestra clave que vamos a comparar con r del mensaje firmado
-    r1 = ((potencia_modular(alfa, u, p) * potencia_modular(y, v, p)) % p) % q
-
-    # Si las claves son iguales, la firma será valida; si no, no será valido
-    if r == r1:
-        print('Firma vValida!')
-    else:
-        print('La firma no es valida!')
+# Si las claves son iguales, la firma será valida; si no, no será valido
+if r == r1:
+    print('La firma es valida!')
+else:
+    print('La firma no es valida!')

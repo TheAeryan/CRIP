@@ -9,10 +9,9 @@ Práctica 4 de Criptografía - Firma Digital
 """
 
 from hashlib import sha256
-from random import randint
-from GenerarClaves import *
-from Practica1 import *
+from Practica1 import potencia_modular
 from Practica3 import inversomodular
+from random import randint
 
 
 def generacion_firma(mensaje):
@@ -21,11 +20,12 @@ def generacion_firma(mensaje):
 
     clave_priv = "clave_priv.txt"
     with open(clave_priv, "r", encoding='utf-8-sig') as f:
-        p = int(f.readline())
-        q = int(f.readline())
-        alfa = int(f.readline())
-        y = int(f.readline())
-        x = int(f.readline())
+        lineas = f.readlines()
+        p = int(lineas[0])
+        q = int(lineas[1])
+        alfa = int(lineas[2])
+        x = int(lineas[4])
+        f.close()
 
     # Se hace el resumen del mensaje utilizando SHA-2 y se convierte el resumen a decimal para que se puedan utilizar
     # diversas operaciones en el.
@@ -51,3 +51,8 @@ def generacion_firma(mensaje):
             fich_firm.write(str(r) + '\n')
             fich_firm.write(str(s) + '\n')
             fich_firm.close()
+
+
+if __name__ == "__main__":
+    nombre_fichero = str(input("Escribir el nombre del fichero con su tipo la que quieres firmar: "))
+    generacion_firma(nombre_fichero)
