@@ -11,8 +11,8 @@ Código asociado a la tercera práctica de Criptografía y Computación.
 
 import time
 from random import randint
-#import numpy as np
-#import matplotlib.pyplot as trx
+# import numpy as np
+# import matplotlib.pyplot as trx
 from Practica1 import *
 
 
@@ -303,7 +303,7 @@ def ld_pasoenanogigante(a, b, p):
     while t != s:
         if n in sol:
             i = sol.index(n)
-        # for i in range(len(sol)):
+            # for i in range(len(sol)):
             # if sol[i] == n:
             # Si lo encontramos, returnamos el resultado del logaritmo com t * s - i
             x = t * s - i
@@ -389,13 +389,14 @@ def analisis_tiempos_pollard(lista1=[]):
         factorizacion_pollard(lista1[i])
     return (time.time() - tm) / 5
 
-#Lista de valores ingresados para la evaluación de tiempos para PLD
+
+# Lista de valores ingresados para la evaluación de tiempos para PLD
 lista = [5, 2, 7], [61, 34, 47], [320, 240, 193], [4320, 7240, 1613], [53205, 62407, 39581], [753205, 853407, 465901], [
     8753209, 1853401, 6561437], [18753208, 61853403, 15484247], [238763200, 751803489, 957833221], [9238763200,
                                                                                                     8751803410,
                                                                                                     2111511013]
 
-#Lista de los tiempos obtenidos para cada algoritmo de PLD
+# Lista de los tiempos obtenidos para cada algoritmo de PLD
 tiempo_ldfuerza = [0.002000093460083008, 0.009000301361083984, 0.016000032424926758, 0.025000333786010742,
                    0.12840008735656738, 3.954200029373169, 25.077800273895264, 97.6502001285553]
 tiempo_ldpaso = [0.015599966049194336, 0.015599966049194336, 0.015599966049194336, 0.031200170516967773,
@@ -407,7 +408,6 @@ tiempo_ldpollard = [0.003000020980834961, 0.0060002803802490234, 0.0130000114440
 
 xld_pp = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
 xld_f = [1, 2, 3, 4, 5, 6, 7, 8]
-
 
 lista5 = [46191, 88369, 49651, 48159, 20609]
 lista6 = [846979, 599721, 721071, 950975, 346295]
@@ -465,7 +465,6 @@ lista28_primos = [5850474318096111894683625481, 3593242916726738408465377037, 41
 lista30_primos = [354715488224177334052265923067, 35637469888392748218731246909, 271095853187327378593386172019,
                   90927035584308626764936238821, 546924770534842721391774199163]
 
-
 # Los tiempos fuerza bruta no funcionan con numeros productos de primos de 28 cifras!
 tiempos_fb = [0.0002723217010498047, 0.00034456253051757814, 0.0003478527069091797, 0.00044956207275390623,
               0.0005135059356689454, 0.0009255886077880859, 0.016902446746826172, 0.02760634422302246,
@@ -484,7 +483,6 @@ tiempos_fermat_primos = [0.0005938529968261719, 0.0005416393280029297, 0.0023065
                          0.00247807502746582, 0.010994815826416015, 5.942388963699341, 8.430172872543334,
                          14.532694435119629, 129.06682448387147]
 
-
 # Los tiempos de pollard no funcionan con numeros de 42 cifras
 tiempos_pollard = [0.0004434108734130859, 0.0004404544830322266, 0.0006488800048828125, 0.0007706165313720703,
                    0.0008330821990966796, 0.0011154651641845704, 0.0022962093353271484, 0.005032730102539062,
@@ -496,7 +494,6 @@ tiempos_pollard_primos = [0.000609445571899414, 0.0005429744720458985, 0.0008871
                           0.0011094093322753906, 0.001357698440551758, 0.018590736389160156, 0.2539022922515869,
                           0.5273216724395752, 0.5921258449554443, 0.8036890983581543, 7.991343784332275,
                           9.842744874954224, 26.54191737174988, 38.85830988883972, 98.68661375045777]
-
 
 xfb = [5, 6, 7, 8, 9, 10, 15, 20, 25, 26, 27, 28]
 xfb_primos = [5, 10, 15, 16, 17, 18, 19, 20]
@@ -595,4 +592,3 @@ trx.legend(loc="lower right")
 trx.title('Análisis de tiempo para la solución de Logaritmo Discreto con Fuerza Bruta ')
 trx.show()
 """
-
