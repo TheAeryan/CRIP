@@ -3,5 +3,7 @@ Repository containing the projects made for the 'Computation and Cryptography' c
 
 ## Authors
 Carlos Núñez Molina
+
 Alessandro Zito
+
 Gabriela Antolinez
